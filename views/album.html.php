@@ -106,7 +106,7 @@ endif;
 </div>
 <? if (module::get_var("th_pear4gallery3", "sidebar_view") != ''): ?>
 </td><td>
-<div id="sidebarContainer">
+<div id="sidebarContainer" style="overflow-y: auto;">
 <div id="sidebarBorder" style="background-color: darkGrey; width: 5px; height: 100%; position: absolute;"></div>
 <div id="sidebar" class="sidebar" style="width: 220px; position: aboslute; padding-left: 5px;">
   <? if ($theme->page_subtype != "login"): ?>
