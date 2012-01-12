@@ -14,6 +14,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?= $theme->html_attributes() ?> xml:lang="en" lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <? $theme->start_combining("script,css") ?>
     <title>
       <? if ($page_title): ?>
