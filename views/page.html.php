@@ -1,14 +1,18 @@
 <?php defined("SYSPATH") or die("No direct script access.") ?>
+<?
+if (isset($_GET['ajax'])) {
+  echo new View("thumbs.html");
+  die(0);
+}
+?>
 <? if ($theme->page_subtype == "photo"):
   foreach (end($parents)->viewable()->children() as $i => $child)
     if(!($child->is_album() || $child->is_movie()))
-      if($child->url() == $_SERVER['REQUEST_URI']):
-        $page_size = module::get_var("gallery","page_size"); ?>
-<html><body>
-  <script type="text/javascript">window.location = '<?= end($parents)->url() . "?page=".((int)($i/$page_size)+1)."#img=".$i % $page_size ."&viewMode=detail&redirected=true"?>';</script>
-</body></html>
-        <? die(0) ?>
-      <? endif ?>
+      if($child->url() == $_SERVER['REQUEST_URI']) {
+        header("HTTP/1.1 302 Found");
+        header("Location: ".end($parents)->url()."#img=$i&viewMode=detail&redirected=true");
+        die(0);
+      }?>
 <? endif ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -52,6 +56,7 @@
     <?= $theme->script("jquery-1.6.2.min.js") ?>
     <?= $theme->script("jquery.form.js") ?>
     <?= $theme->script("jquery-ui-1.8.16.custom.min.js") ?>
+    <?= $theme->script("jquery.endless-scroll.js") ?>
     <?= $theme->script("gallery.common.js") ?>
     <? /* MSG_CANCEL is required by gallery.dialog.js */ ?>
     <script type="text/javascript">
@@ -124,7 +129,7 @@
     <? if(!empty($parents)): ?>
       <? foreach ($parents as $parent): ?>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) $parent = end($parents); ?>
-        <button class="large push large-with-push" onclick="window.location='<?= $parent->url($parent->id == $theme->item()->parent_id ? "show={$theme->item()->id}" : null) ?>' + '#viewMode=' + viewMode;"> <div class="outer"> <div class="label"> <?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></div> </div></button>
+        <button class="large push large-with-push" onclick="window.location='<?= $parent->url() ?>' + '#viewMode=' + viewMode;"> <div class="outer"> <div class="label"> <?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></div> </div></button>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) break; ?>
       <? endforeach ?>
     <? endif ?>

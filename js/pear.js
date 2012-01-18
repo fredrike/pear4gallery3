@@ -1,5 +1,5 @@
 /*jslint browser: true, regexp: true, sub: false, vars: false, white: false, nomen: false, sloppy: true, undef: false, plusplus: true */
-/*global jQuery, $, Event, refresh, escape, unescape, slideshowImages, ImageFlow */
+/*global jQuery, $, Event, refresh, escape, unescape, slideshowImages, ImageFlow, focusImage, swatchImg  */
 
 var viewMode = "";
 var skimimg = 0;
@@ -26,9 +26,102 @@ function thumbPadding() {
     size = Math.ceil((mosaicView) ? $('#imgSlider').slider('value') / 2 : $('#imgSlider').slider('value')) + 10;
     width = $('#mosaicGridContainer').innerWidth() - 16;
     margin = width / Math.floor(width / size) - size;
-//    console.log(size, width, margin, "px");
     $('.gallery-thumb').css({'margin-left': Math.ceil(margin / 2) + 'px', 'margin-right': Math.floor(margin / 2) + 'px'});
+}
 
+function toggleReflex(hide) {
+    if (hide) {
+        //	$$('.Fer').each(function(s) { cvi_reflex.remove(s); });
+        $('mosaicGridContainer').select('img[class="Fer"]').each(function (s, index) { Event.observe(s, 'click', function () { if (mosaicView) { swatchImg(index); } else { focusImage(index); } }); });
+    } else {
+        //	$$('.Fer').each(function(s) { cvi_reflex.add(s, {height: 20, distance: 0 }); });
+        $('mosaicGridContainer').select('canvas[class="Fer"]').each(function (s, index) { Event.observe(s, 'click', function () { if (mosaicView) { swatchImg(index); } else { focusImage(index); } }); });
+    }
+}
+
+function scaleIt(v, sliding) {
+    //if(maxSize<100)maxSize=150;
+
+    // Remap the 0-1 scale to fit the desired range
+    //v=.26+(v*(1.0-.26));
+    var size = (mosaicView) ? v / 2 : v;
+
+    toggleReflex(true);
+    $(".p-photo").each(function (i) {
+        $(this).attr({height: size + 'px', width: size + 'px'});
+        $(this).css({height: size + 'px', width: size + 'px'});
+    });
+    $(".g-photo").css({width: size + 'px'});
+    if (!mosaicView && !sliding) {
+        toggleReflex(false);
+    }
+    thumbPadding();
+}
+
+function thumbLoad(index) {
+    //Load non skimming thumbs
+    $('.g-thumbnail').each( function() { $(this).attr('src', thumbImages[$(this).attr('id')]); });
+    //Load skimming thumbs
+    $('.skimm_div').each( function() { $(this).append(thumbImages[$(this).attr('id')]); });
+
+    //Re-initiate all fancyness.
+    if (mosaicView) { $('p.giTitle,div.giInfo').hide(); } else { $('p.giTitle,div.giInfo').show(); }
+    scaleIt($('#imgSlider').slider('value'));
+    $('.p-photo').each(function (index) { $(this).unbind('click'); $(this).click(function () { if (mosaicView) { swatchImg(index); } else {focusImage(index); } }); });
+    // Apply jQuery UI icon and hover styles to context menus
+    if ($(".g-context-menu").length) {
+        $(".g-context-menu li").addClass("ui-state-default");
+        $(".g-context-menu a").addClass("g-button ui-icon-left");
+        $(".g-context-menu a span.ui-icon").remove();
+        $(".g-context-menu a").prepend("<span class=\"ui-icon\"></span>");
+        $(".g-context-menu a span").each(function() {
+                /*jslint regexp: false*/
+                var iconClass = $(this).parent().attr("class").match(/ui-icon-.[^\s]+/).toString();
+                /*jslint regexp: true*/
+                $(this).addClass(iconClass);
+                });
+        $("ul.g-context-menu > li a span").addClass("ui-icon-carat-1-s");
+    }
+    // Initialize thumbnail hover effect
+    $(".g-item").hover(
+            function() {
+            if(mosaicView) { return; }
+            // Insert a placeholder to hold the item's position in the grid
+            var placeHolder = $(this).clone().attr("id", "g-place-holder");
+            $(this).after($(placeHolder));
+            // Style and position the hover item
+            $(this).addClass("g-hover-item");
+            // Initialize the contextual menu
+            $(this).gallery_context_menu();
+            // Set the hover item's height
+            $(this).height("auto");
+            },
+            function() {
+            var sib_height;
+            if (mosaicView) { return; }
+            // Remove the placeholder and hover class from the item
+            $(this).removeClass("g-hover-item");
+            $("#g-place-holder").remove();
+            }
+            );
+    thumbPadding();
+
+    //Pre fetch images
+    //if ( typeof prefetch === 'undefined') { prefetch = 0; }
+    //for ( ; prefetch < slideshowImages.length; prefetch=prefetch+1 ) { $('<img />').attr('src', slideshowImages[prefetch][0]); }
+}
+
+function loadMore() {
+    if ( navigation.next !== '') {
+        var url = navigation.next;
+        navigation.next = '';
+        $.get(url,{ ajax: '1'},function (data) {
+            $('#mosaicGridContainer').append(data);
+            thumbLoad();
+        });
+        return true;
+    }
+    else { return false; }
 }
 
 function setCookie(c_name, value, expiredays) {
@@ -194,6 +287,13 @@ function swatchSkin(intSkin) {
 //Set a updating timer so users can't update before the image has appeard..
 function swatchImg(imageId) {
     if (imageId < 0 || imageId >= slideshowImages.length) {
+        if ( navigation.next !== '') {
+            $.get(navigation.next,{ ajax: '1'},function (data) {
+                    $('#mosaicGridContainer').append(data);
+                    thumbLoad();
+                    swatchImg(imageId);
+                    });
+        }
         return;
     }
     currentImg = imageId;
@@ -213,7 +313,6 @@ function swatchImg(imageId) {
             $('#mosaicImg').css('cursor', "pointer");
             $('#mosaicDetail').show(mosaicEffect, options, "slow");});
     }
-    mosaicResize();
 
     /* Set controls for hover view. */
     if (currentImg === 0) {
@@ -239,6 +338,7 @@ function swatchImg(imageId) {
     }
     updateHash();
     $('#info_detail').attr('href', slideshowImages[currentImg][1]);
+    mosaicResize();
 }
 
 function hideHoverView() {
@@ -249,51 +349,32 @@ function hideHoverView() {
 function showHoverView() {
     if (hideHoverV !== null) { clearTimeout(hideHoverV); }
     $('#hoverView').show();
-    hideHoverV = setTimeout("hideHoverView()", 3000);
+    hideHoverV = setTimeout(hideHoverView, 3000);
 }
 
 function focusImage(id, redirected) {
+    if (id < 0 || id >= slideshowImages.length) {
+        if ( navigation.next !== '') {
+            $.get(navigation.next,{ ajax: '1'},function (data) {
+                    $('#mosaicGridContainer').append(data);
+                    thumbLoad();
+                    focusImage(id);
+                    });
+        }
+        return;
+    }
     currentImg = id;
+    swatchImg(id);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[id][4] + "</h2>");
     $('#play_detail').hide();
     $('#pause_detail').hide();
-    swatchImg(id);
     $('#detailView').fadeIn('slow');
-    hideHoverV = setTimeout("hideHoverView()", 3000);
+    showHoverView();
     detailViewMode = true;
     updateHash();
     //Image count.
     if (!redirected) { $.get(slideshowImages[currentImg][6]); }
     $('#info_detail').attr('href', slideshowImages[currentImg][1]);
-}
-
-function toggleReflex(hide) {
-    if (hide) {
-        //	$$('.Fer').each(function(s) { cvi_reflex.remove(s); });
-        $('mosaicGridContainer').select('img[class="Fer"]').each(function (s, index) { Event.observe(s, 'click', function () { if (mosaicView) { swatchImg(index); } else { focusImage(index); } }); });
-    } else {
-        //	$$('.Fer').each(function(s) { cvi_reflex.add(s, {height: 20, distance: 0 }); });
-        $('mosaicGridContainer').select('canvas[class="Fer"]').each(function (s, index) { Event.observe(s, 'click', function () { if (mosaicView) { swatchImg(index); } else { focusImage(index); } }); });
-    }
-}
-
-function scaleIt(v, sliding) {
-    //if(maxSize<100)maxSize=150;
-
-    // Remap the 0-1 scale to fit the desired range
-    //v=.26+(v*(1.0-.26));
-    var size = (mosaicView) ? v / 2 : v;
-
-    toggleReflex(true);
-    $(".p-photo").each(function (i) {
-        $(this).attr({height: size + 'px', width: size + 'px'});
-        $(this).css({height: size + 'px', width: size + 'px'});
-    });
-    $(".g-photo").css({width: size + 'px'});
-    if (!mosaicView && !sliding) {
-        toggleReflex(false);
-    }
-    thumbPadding();
 }
 
 function checkCookie() {
@@ -313,12 +394,21 @@ function getAlbumHash(img) {
     return "#img=" + img + getViewMode() +  "&bgcolor=" + bgcolor;
 }
 
+function slideShowUpdate() {
+    slideShowId = slideShowId + 1;
+    if (slideShowId > slideshowImages.length) {
+        slideShowId = 0;
+    }
+    swatchImg(slideShowId);
+    slideShow = setTimeout(slideShowUpdate, slideshowTimeout);
+}
+
 function togglePlayPause() {
     //We are paused
     if (slideShow === null) {
         $('#play_detail').hide();
         $('#pause_detail').show();
-        slideShow = setTimeout("slideShowUpdate()", slideshowTimeout);
+        slideShow = setTimeout(slideShowUpdate, slideshowTimeout);
     } else { //We are playing
         $('#pause_detail').hide();
         $('#play_detail').show();
@@ -332,19 +422,10 @@ function startSlideshow() {
     $('#play_detail').hide();
     $('#pause_detail').show();
     $('#detailView').fadeIn('slow');
-    hideHoverV = setTimeout("hideHoverView()", 3000);
+    showHoverView();
     slideShowId = currentImg;
     swatchImg(slideShowId);
     togglePlayPause();
-}
-
-function slideShowUpdate() {
-    slideShowId = slideShowId + 1;
-    if (slideShowId > slideshowImages.length) {
-        slideShowId = 0;
-    }
-    swatchImg(slideShowId);
-    slideShow = setTimeout("slideShowUpdate()", slideshowTimeout);
 }
 
 function switchMode(mode) {
@@ -480,7 +561,6 @@ function bodyLoad(vm, bgcolor) {
         slide: function (event, ui) { scaleIt(ui.value); },
         change: function (event, ui) { scaleIt(ui.value); setCookie('slider', ui.value, '1'); } });
 
-    if (!$('#mosaicGridContainer').length) { $('#loading').hide(); maxSize = 0; return; }
     //Set event for Thumb Click.
     $('.p-photo').each(function (index) { $(this).click(function () { if (mosaicView) { swatchImg(index); } else {focusImage(index); } }); });
     $('#mosaicDetail').click(function () { focusImage(currentImg); });
@@ -511,32 +591,11 @@ function bodyLoad(vm, bgcolor) {
         checkCookie();
     }
 
-    $('#loading').hide();
-    window.setTimeout("preFetch()", 500);
     setKeys();
+    thumbLoad();
+    $('#mosaicGridContainer').endlessScroll({ fireOnce: true, fireDelay: 500, callback: function(p) { loadMore(); } });
+    $('#loading').hide();
 
-    // Initialize thumbnail hover effect
-    $(".g-item").hover(
-      function() {
-        if(mosaicView) { return; }
-      // Insert a placeholder to hold the item's position in the grid
-        var placeHolder = $(this).clone().attr("id", "g-place-holder");
-        $(this).after($(placeHolder));
-        // Style and position the hover item
-        $(this).addClass("g-hover-item");
-        // Initialize the contextual menu
-        $(this).gallery_context_menu();
-        // Set the hover item's height
-        $(this).height("auto");
-      },
-      function() {
-        var sib_height;
-        if (mosaicView) { return; }
-        // Remove the placeholder and hover class from the item
-        $(this).removeClass("g-hover-item");
-        $("#g-place-holder").remove();
-      }
-    );
     if (slideshowImages.length !== 0) {
         $(".viewSwitcher").hover( function() { $(this).addClass("hover-with-viewSwitcher"); }, function() { $(this).removeClass("hover-with-viewSwitcher"); });
         $("#grid").click(function () { switchToGrid(true); });
@@ -545,16 +604,6 @@ function bodyLoad(vm, bgcolor) {
         $('#slideshow').click(function () { startSlideshow(); });
     } else {
         $("#grid, #mosaic, #carousel, #slideshow").addClass("disabled");
-    }
-}
-
-function preFetch() {
-    var i, cache = [];
-    for (i = 0; i < slideshowImages.length; i=i+1) {
-      //  var tempImage = new Element('img', {'src': slideshowImages[i][0]});
-      var cacheImage = document.createElement('img');
-      cacheImage.src = slideshowImages[i][0];
-      cache.push(cacheImage);
     }
 }
 
