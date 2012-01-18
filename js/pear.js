@@ -566,6 +566,7 @@ function bodyLoad(vm, bgcolor) {
     $('#mosaicDetail').click(function () { focusImage(currentImg); });
     $('#prev_detail').click(function () { swatchImg(currentImg - 1); });
     $('#next_detail').click(function () { swatchImg(currentImg + 1); });
+    $('#img_detail').click(function () { hideDetailView(); });
 
     co = getCookie('swatchSkin');
     if (co === null || co === "") {
