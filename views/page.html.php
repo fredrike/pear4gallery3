@@ -135,7 +135,9 @@ if (isset($_GET['ajax'])) {
     <? endif ?>
     </div>
     <div class="pearTitle" title="<?= $theme->item()->description ?>"> <?= html::purify(text::limit_chars($theme->item()->title, 40)) ?> &nbsp;
+      <? if (!module::get_var("th_pear4gallery3", "hide_item_count")): ?>
         <span class="count">(<?= count($theme->item()->children()) ?>)</span>
+      <? endif ?>
     </div>
 <? endif ?>
     <div class="rNavBar">

@@ -89,6 +89,9 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
     /* Advanced Options - General ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
     $group = $form->group("edit_theme_adv_main")->label(t("Advanced Options - General"));
+    $group->checkbox("hide_item_count")
+      ->label(t("Hide Album Count"))
+      ->checked(module::get_var("th_pear4gallery3", "hide_item_count"));
     $group->checkbox("hide_logo")
       ->label(t("Hide Bottom Pear Logo"))
       ->checked(module::get_var("th_pear4gallery3", "hide_logo"));
@@ -208,6 +211,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
   }
 
   protected function legacy() {
+    module::clear_var("th_pear4gallery3", "hide_item_count");
     module::clear_var("th_pear4gallery3", "hide_logo");
     module::clear_var("th_pear4gallery3", "mainmenu_view");
     module::clear_var("th_pear4gallery3", "show_guest_menu");
@@ -297,6 +301,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
 
         // * Advanced Options - General ******************************************
 
+        $this->save_item_state("hide_item_count",       $form->edit_theme_adv_main->hide_item_count->value, TRUE);
         $this->save_item_state("hide_logo",       $form->edit_theme_adv_main->hide_logo->value, TRUE);
         $this->save_item_state("mainmenu_view",         $form->edit_theme_adv_main->mainmenu_view->value != "grid", $form->edit_theme_adv_main->mainmenu_view->value);
         $this->save_item_state("show_guest_menu",$form->edit_theme_adv_main->show_guest_menu->value, TRUE);

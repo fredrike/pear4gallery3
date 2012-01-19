@@ -48,7 +48,7 @@ endforeach;
 endif;
 // End skimming // ?>
     <p class="giTitle <? if(!$child->is_album()) print 'center';?>"><?= html::purify(text::limit_chars($child->title, 20)) ?> </p>
-    <? if($child->is_album()): ?><div class="giInfo"><?= count($granchildren)?> photos</div><? endif ?>
+    <? if($child->is_album() && !module::get_var("th_pear4gallery3", "hide_item_count")): ?><div class="giInfo"><?= count($granchildren)?> photos</div><? endif ?>
 </div>
     <? if ($child->is_movie()): ?>
       </a>
