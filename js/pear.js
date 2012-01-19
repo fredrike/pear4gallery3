@@ -329,6 +329,7 @@ function swatchImg(imageId) {
         $('#next_detail').removeClass('next_detail_disabled');
         $('#next_detail').addClass('next_detail');
     }
+    $('#img_detail').hide();
     /* Update image and title in focus view */
     $('#img_detail').attr('src', slideshowImages[currentImg][0]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
@@ -339,6 +340,7 @@ function swatchImg(imageId) {
     updateHash();
     $('#info_detail').attr('href', slideshowImages[currentImg][1]);
     mosaicResize();
+    $('#img_detail').fadeIn();
 }
 
 function hideHoverView() {
