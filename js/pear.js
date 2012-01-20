@@ -52,6 +52,7 @@ function scaleIt(v, sliding) {
         toggleReflex(false);
     }
     thumbPadding();
+    $('#mosaicGridContainer').trigger('scroll');
 }
 
 function thumbLoad(index) {
@@ -589,6 +590,7 @@ function bodyLoad(vm, bgcolor) {
     setKeys();
     thumbLoad();
     $('#mosaicGridContainer').endlessScroll({ fireOnce: true, fireDelay: 500, callback: function(p) { loadMore(); } });
+    $('#mosaicGridContainer').trigger('scroll');
     $('#loading').hide();
 
     if (slideshowImages.length !== 0) {
