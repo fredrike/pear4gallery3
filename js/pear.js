@@ -15,7 +15,6 @@ var slideShowId;
 var pearCarousel;
 var hideHoverV = null;
 var hovering = false;
-var maxSize;
 var mosaicEffect = "";
 var slideshowTimeout = 5000;
 
@@ -39,8 +38,6 @@ function toggleReflex(hide) {
 }
 
 function scaleIt(v, sliding) {
-    //if(maxSize<100)maxSize=150;
-
     // Remap the 0-1 scale to fit the desired range
     //v=.26+(v*(1.0-.26));
     var size = (mosaicView) ? v / 2 : v;
@@ -439,7 +436,7 @@ function switchToGrid(userSet) {
     $('#mosaicTable').show();
     if (!$('#mosaicGridContainer').length) { return; }
     mosaicView = false;
-    maxSize = 225;
+    scaleIt($('#imgSlider').slider('value'));
     checkCookie();
     $('#mosaicDetail').hide();
     $('#mosaicGridContainer').show();
@@ -457,7 +454,7 @@ function switchToMosaic(userSet) {
     $('#mosaicTable').show();
     if (!$('#mosaicGridContainer').length) { return; }
     mosaicView = true;
-    maxSize = 125;
+    scaleIt($('#imgSlider').slider('value'));
     checkCookie();
     $('#mosaicDetail').show();
     $('#mosaicGridContainer').show();
