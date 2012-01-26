@@ -124,7 +124,6 @@ if (isset($_GET['ajax'])) {
 <div class="pear">
 
 <div id="gsNavBar" class="gcBorder1">
-<? if ($theme->item()): ?>
     <div class="lNavBar">
     <? if(!empty($parents)): ?>
       <? foreach ($parents as $parent): ?>
@@ -132,11 +131,26 @@ if (isset($_GET['ajax'])) {
         <button class="large push large-with-push" onclick="window.location='<?= $parent->url() ?>' + '#viewMode=' + viewMode;"> <div class="outer"> <div class="label"> <?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></div> </div></button>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) break; ?>
       <? endforeach ?>
+    <? elseif (!($theme->item() && $theme->item()->id == item::root()->id)): ?>
+        <button class="large push large-with-push" onclick="window.location='<?= item::root()->url() ?>' + '#viewMode=' + viewMode;"> <div class="outer"> <div class="label"> <?= t("go back to the Gallery home")->for_html_attr() ?></div> </div></button>
     <? endif ?>
     </div>
+<? if ($theme->item()): ?>
     <div class="pearTitle" title="<?= $theme->item()->description ?>"> <?= html::purify(text::limit_chars($theme->item()->title, 40)) ?> &nbsp;
       <? if (!module::get_var("th_pear4gallery3", "hide_item_count")): ?>
         <span class="count">(<?= count($theme->item()->children()) ?>)</span>
+      <? endif ?>
+    </div>
+<? else: ?>
+    <div class="pearTitle">
+      <? if ($page_title): ?>
+          <?= html::purify(text::limit_chars($page_title, 40)) ?> &nbsp;
+      <? else: ?>
+        <? if ($theme->tag()): ?>
+          <?= t("Photos tagged with %tag_title", array("tag_title" => $theme->tag()->name)) ?>
+        <? else: /* Not an item, not a tag, no page_title specified.  Help! */ ?>
+          <?= html::purify(text::limit_chars(item::root()->title, 40)) ?> &nbsp;
+        <? endif ?>
       <? endif ?>
     </div>
 <? endif ?>
