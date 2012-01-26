@@ -64,7 +64,7 @@ function thumbLoad(index) {
     //Re-initiate all fancyness.
     if (mosaicView) { $('p.giTitle,div.giInfo').hide(); } else { $('p.giTitle,div.giInfo').show(); }
     scaleIt($('#imgSlider').slider('value'));
-    $('.p-photo').each(function (index) { $(this).unbind('click'); $(this).click(function () { if (mosaicView) { swatchImg(index); } else {focusImage(index); } }); });
+    $('.g-item').each(function (index) { $(this).unbind('click'); if ($(this).is('.g-photo')) { $(this).click(function () { if (mosaicView) { swatchImg(index); } else { focusImage(index); } }); }});
     // Apply jQuery UI icon and hover styles to context menus
     if ($(".g-context-menu").length) {
         $(".g-context-menu li").addClass("ui-state-default");
@@ -103,6 +103,8 @@ function thumbLoad(index) {
             );
     thumbPadding();
 
+    pearCarousel = null;
+    $("#pearImageFlow").empty();
     //Pre fetch images
     //if ( typeof prefetch === 'undefined') { prefetch = 0; }
     //for ( ; prefetch < slideshowImages.length; prefetch=prefetch+1 ) { $('<img />').attr('src', slideshowImages[prefetch][0]); }
@@ -300,6 +302,13 @@ function swatchImg(imageId) {
         }
         return;
     }
+
+    if ( typeof slideshowImages[imageId] === 'undefined' ) {
+        imageId += 1;
+        if ( imageId >= slideshowImages.length ) { swatchImg(0); } else { swatchImg(imageId); }
+        return;
+    }
+
     currentImg = imageId;
 
     if (mosaicView) {
@@ -480,6 +489,7 @@ function startImageFlow(userSet) {
     if (!pearCarousel) {
         for (i = 0; i < slideshowImages.length; i++) {
             //var img = '<div class="item"><img class="content" src="' + slideshowImages[i][0] + '"/><div class="caption">' + $('#mosaicGridContainer img').eq(i).attr('alt') + '"</div></div>';
+        if ( typeof slideshowImages[i] === 'undefined' ) { continue; }
             img = '<img src="' + slideshowImages[i][0] + '" longdesc="' + i + '" width="' + slideshowImages[i][2] + '" height="' + slideshowImages[i][3] + '" alt="' + slideshowImages[i][4] + '" style="display: none;">';
             //		console.log(img);
             $('#pearImageFlow').append(img);
@@ -557,7 +567,7 @@ function bodyLoad(vm, bgcolor) {
         change: function (event, ui) { scaleIt(ui.value); setCookie('slider', ui.value, '1'); } });
 
     //Set event for Thumb Click.
-    $('.p-photo').each(function (index) { $(this).click(function () { if (mosaicView) { swatchImg(index); } else {focusImage(index); } }); });
+    $('.g-item').each(function (index) { { $(this).click(function () { if (mosaicView) { swatchImg(index); } else { focusImage(index); } }); }});
     $('#mosaicDetail').click(function () { focusImage(currentImg); });
     $('#prev_detail').click(function () { swatchImg(currentImg - 1); });
     $('#next_detail').click(function () { swatchImg(currentImg + 1); });

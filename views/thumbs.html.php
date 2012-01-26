@@ -11,9 +11,9 @@
     <? $img_class = "g-thumbnail"; ?>
     <? if ($child->is_photo()): ?>
       <? $img_class = "g-thumbnail p-photo"; ?>
-    <? endif ?>
-    <? if ($child->is_movie()): ?>
-      <a href="<?= $child->url() ?>">
+    <? elseif ($child->is_movie()): ?>
+      <? $item_class = "g-video\" onclick=\"window.location='".$child->url()."';"; ?>
+      <? $img_class = "g-thumbnail p-movie"; ?>
     <? endif ?>
   <div id="g-thumb-id-<?= $child->id ?>" class="g-item gallery-thumb <?= $item_class ?>" title="<?= $child->description?>">
     <?= $theme->thumb_top($child) ?>
@@ -50,15 +50,14 @@ endif;
     <p class="giTitle <? if(!$child->is_album()) print 'center';?>"><?= html::purify(text::limit_chars($child->title, 20)) ?> </p>
     <? if($child->is_album() && !module::get_var("th_pear4gallery3", "hide_item_count")): ?><div class="giInfo"><?= count($granchildren)?> photos</div><? endif ?>
 </div>
-    <? if ($child->is_movie()): ?>
-      </a>
-    <? endif ?>
   <? endforeach ?>
 <script  type="text/javascript">
 <? $item_no = ($page*$page_size)-$page_size; ?>
 <? foreach ($children as $i => $child): ?>
 <? if(!($child->is_album() || $child->is_movie())): ?>
 slideshowImages[<?= $item_no++ ?>] = (['<?= $child->resize_url() ?>', '<?= url::site("exif/show/$child->id") ?>', '<?= $child->width ?>','<?= $child->height ?>', '<?= htmlentities($child->title, ENT_QUOTES) ?>', '<?= $child->file_url() ?>', '<?= $child->url() ?>']);
+<? else: ?>
+<? $item_no++ ?>
 <? endif ?>
 <? endforeach ?>
 <?= $javaScript ?>
