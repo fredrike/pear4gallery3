@@ -149,7 +149,7 @@ function mosaicResize() {
     }
     var myWidth = 0, myHeight = 0;
     var iRatio = 0, iWidth = 0, iHeight = 0;
-    if (slideshowImages.lenght <= currentImg) {
+    if (slideshowImages.length > currentImg) {
         iWidth = parseFloat(slideshowImages[currentImg][2].replace(/,/gi, "."));
         iHeight = parseFloat(slideshowImages[currentImg][3].replace(/,/gi, "."));
         iRatio = iWidth / iHeight;
