@@ -66,7 +66,8 @@ background:transparent url('footer_bg.png') top center;
 height:40px;
 clear:both; 
 z-index: 100;
-position: relative;
+position: absolute;
+bottom: 0px;
 }
 
 #logoButton {

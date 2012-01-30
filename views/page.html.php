@@ -53,9 +53,9 @@ if (isset($_GET['ajax'])) {
     <? endif ?>
 
     <?= $theme->script("json2-min.js") ?>
-    <?= $theme->script("jquery-1.6.2.min.js") ?>
+    <?= $theme->script("jquery-1.7.1.min.js") ?>
     <?= $theme->script("jquery.form.js") ?>
-    <?= $theme->script("jquery-ui-1.8.16.custom.min.js") ?>
+    <?= $theme->script("jquery-ui-1.8.17.custom.min.js") ?>
     <?= $theme->script("jquery.endless-scroll.js") ?>
     <?= $theme->script("gallery.common.js") ?>
     <? /* MSG_CANCEL is required by gallery.dialog.js */ ?>
@@ -128,11 +128,11 @@ if (isset($_GET['ajax'])) {
     <? if(!empty($parents)): ?>
       <? foreach ($parents as $parent): ?>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) $parent = end($parents); ?>
-        <button class="large push large-with-push" onclick="window.location='<?= $parent->url() ?>' + '#viewMode=' + viewMode;"> <div class="outer"> <div class="label"> <?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></div> </div></button>
+        <button class="large push large-with-push" onclick="window.location='<?= $parent->url() ?>' + getAlbumHash(0);"> <div class="outer"> <div class="label"> <?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></div> </div></button>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) break; ?>
       <? endforeach ?>
     <? elseif (!($theme->item() && $theme->item()->id == item::root()->id)): ?>
-        <button class="large push large-with-push" onclick="window.location='<?= item::root()->url() ?>' + '#viewMode=' + viewMode;"> <div class="outer"> <div class="label"> <?= t("go back to the Gallery home")->for_html_attr() ?></div> </div></button>
+        <button class="large push large-with-push" onclick="window.location='<?= item::root()->url() ?>' + getAlbumHash(0);"> <div class="outer"> <div class="label"> <?= t("go back to the Gallery home")->for_html_attr() ?></div> </div></button>
     <? endif ?>
     </div>
 <? if ($theme->item()): ?>

@@ -4,12 +4,12 @@
 var slideshowImages = new Array();
 var thumbImages = new Array();
 $(function() {
-  slideshowTimeout = <?=module::get_var("th_pear4gallery3", "slideshow_time", "5000")?>;
-  mosaicEffect = "<? $mosaic_effect = module::get_var("th_pear4gallery3", "mosaic_effect", "blind");
-    if ($mosaic_effect == "none") print ""; else print $mosaic_effect; ?>";
   sidebarInit('<?=module::get_var("th_pear4gallery3", "sidebar_view")?>');
-  bodyLoad( "<?=module::get_var("th_pear4gallery3", "mainmenu_view")?>",
-    "<?=module::get_var("th_pear4gallery3", "background")?>");
+  pearInit( {
+    defaultView: "<?=module::get_var("th_pear4gallery3", "mainmenu_view")?>",
+    defaultBg: "<?=module::get_var("th_pear4gallery3", "background", "black")?>",
+    mosaicEffect: "<? $mosaic_effect = module::get_var("th_pear4gallery3", "mosaic_effect", "blind"); if ($mosaic_effect == "none") print ""; else print $mosaic_effect; ?>",
+    slideshowTimeout: <?=module::get_var("th_pear4gallery3", "slideshow_time", "5000")?> });
 });
 </script>
 <table id="mosaicTable" style="width: 100%; margin: -2px -2px 0px 0px; overflow: hidden">

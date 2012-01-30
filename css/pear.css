@@ -44,10 +44,8 @@ th, td {
 	text-align: left;
 }
 .pear {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	color: #999 !important;
-	background-color: #000;
 }
 .giTitle {
 	font-size: 1.1em;
@@ -139,3 +137,14 @@ a, .g-menu a, #g-dialog a, .g-button, .g-button:hover, .g-button:active, a.ui-st
     z-index: 20;
 }
 
+.g-thumbnail {
+    border-radius: 5%;
+    /*
+    -webkit-box-reflect: below 0
+        -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.75, transparent), to(white)); 
+     */
+}
+
+.hovering > *{
+    color: #2E8AE6 !important;
+}
