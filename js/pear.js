@@ -55,7 +55,7 @@ function thumbLoad(index) {
     //Re-initiate all fancyness.
     if (pear.currentView === 'mosaic') { $('p.giTitle,div.giInfo').hide(); } else { $('p.giTitle,div.giInfo').show(); }
     scaleIt($('#imgSlider').slider('value'));
-    $('.g-item').each(function (index) { $(this).unbind('click'); if ($(this).is('.g-photo:not(g-hover-item)')) { $(this).click(function () { if (pear.currentView === 'mosaic') { swatchImg(index); } else { focusImage(index); } }); }});
+    $('.g-item:not(.g-hover-item)').each(function (index) { $(this).unbind('click'); if ($(this).is('.g-photo')) { $(this).click(function () { if (pear.currentView === 'mosaic') { swatchImg(index); } else { focusImage(index); } }); }});
     // Apply jQuery UI icon and hover styles to context menus
     if ($(".g-context-menu").length) {
         $(".g-context-menu li").addClass("ui-state-default");
@@ -490,7 +490,7 @@ function startImageFlow() {
             $('#pearImageFlow').append(img);
         }
         pear.pearCarousel = new ImageFlow();
-        pear.pearCarousel.init({ImageFlowID: 'pearImageFlow', aspectRatio: 2.4, imagesHeight: 0.6, opacity: true, reflections: false, startID: currentImg + 1, onClick: function () { focusImage($(this).attr('longdesc')); }, startAnimation: true, xStep: 200, imageFocusM: 1.7, imageFocusMax: 4, opacityArray: [10, 9, 6, 2], percentOther: 130, captions: false, slider: false});
+        pear.pearCarousel.init({ImageFlowID: 'pearImageFlow', aspectRatio: 2.4, imagesHeight: 0.6, opacity: true, reflections: false, startID: pear.currentImg + 1, onClick: function () { focusImage($(this).attr('longdesc')); }, startAnimation: true, xStep: 200, imageFocusM: 1.7, imageFocusMax: 4, opacityArray: [10, 9, 6, 2], percentOther: 130, captions: false, slider: false});
     }
     switchMode('carousel');
     mosaicResize();
