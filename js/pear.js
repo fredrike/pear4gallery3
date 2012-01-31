@@ -7,6 +7,7 @@ var pear = {defaultView: "grid",
     defaultBg: "black",
     slideshowTimeout: 5000,
     currentImg: 0,
+    hovering: false,
     mosaicEffect: "" };
 
 function thumbPadding() {
@@ -338,8 +339,7 @@ function swatchImg(imageId) {
 }
 
 function hideHoverView() {
-    var hovering = false;
-    if (!hovering) { $('#hoverView').fadeOut(); }
+    if (!pear.hovering) { $('#hoverView').fadeOut(); }
     pear.hideHoverViewHandler = null;
 }
 
