@@ -55,7 +55,7 @@ endif;
 <? $item_no = ($page*$page_size)-$page_size; ?>
 <? foreach ($children as $i => $child): ?>
 <? if(!($child->is_album() || $child->is_movie())): ?>
-slideshowImages[<?= $item_no++ ?>] = (['<?= $child->resize_url() ?>', '<?= url::site("exif/show/$child->id") ?>', '<?= $child->width ?>','<?= $child->height ?>', '<?= htmlentities($child->title, ENT_QUOTES) ?>', '<?= $child->file_url() ?>', '<?= $child->url() ?>']);
+slideshowImages[<?= $item_no++ ?>] = (['<?= $child->resize_url() ?>', '<?= url::site("exif/show/$child->id") ?>', '<?= $child->width ?>','<?= $child->height ?>', '<?= htmlentities($child->title, ENT_QUOTES) ?>', '<? if (access::can("view_full", $child)) print $child->file_url(); ?>', '<?= $child->url() ?>']);
 <? else: ?>
 <? $item_no++ ?>
 <? endif ?>

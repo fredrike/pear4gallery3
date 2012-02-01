@@ -333,6 +333,11 @@ function swatchImg(imageId) {
     $('#img_detail').attr('src', slideshowImages[pear.currentImg][0]);
     $('#info_detail').attr('href', slideshowImages[pear.currentImg][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
+    if ( slideshowImages[pear.currentImg][5] === '' ) {
+        $('#download_detail').hide();
+    } else {
+        $('#download_detail').show();
+    }
     updateHash();
     mosaicResize();
     $('#img_detail').fadeIn();
