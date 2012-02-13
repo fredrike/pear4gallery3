@@ -22,7 +22,7 @@
     <? endif ?>
 <?= $theme->context_menu($child, "#g-item-id-{$child->id} .g-thumbnail") ?>
       <? if ($child->has_thumb()): ?>
-      <img id="thumb_<?= $child->id ?>" class="<?= $img_class ?>" style="width: 200px; height; 200px;" src="<?= $theme->url("icons/empty_image.png") ?>">
+      <img id="thumb_<?= $child->id ?>" alt="<?= $child->id ?>" class="<?= $img_class ?>" style="width: 200px; height; 200px;" src="<?= $theme->url("icons/empty_image.png") ?>"/>
  <? $javaScript .= "thumbImages['thumb_" . $child->id . "'] = '" . $child->thumb_url() . "';\n" ?>
         <?// = $child->thumb_img(array("class" => $img_class, "id" => "thumb_$child->id", "style" => "width: 200px; height 200px;")) ?>
       <? else: ?>

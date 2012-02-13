@@ -1,3 +1,66 @@
+#mosaicTable {
+    position: fixed;
+    top: 45px;
+    bottom: 40px;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+}
+
+#mosaicDetail {
+    position: absolute;
+    left: 0;
+    width: 65%;
+    height: 100%;
+    text-align: center;
+}
+
+#mosaicDetailContainer {
+    margin: 0 auto;
+    width: 100%;
+    position: absolute;
+}
+
+#gridContainer {
+    position: absolute;
+    right: 0;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 35%;
+}
+
+#sidebarContainer {
+    position: absolute;
+    right: 0;
+    overflow-y: auto;
+    top: 45px;
+    bottom: 40px;
+}
+
+#sidebarBorder {
+    background-color: darkGrey; 
+    width: 5px; 
+    height: 100%; 
+    position: absolute;
+}
+#sidebar {
+    width: 220px; 
+    position: absolute;
+    padding-left: 5px;
+}
+#pearFlow {
+    width: 100%;
+    height: 100%;
+    z-index: 47;
+    display: none;
+    position: absolute;
+}
+
+#pearFlow .imageflow {
+    position: absolute;
+}
+
 .gallery-thumb-round {
 	background: url('rounded.png') no-repeat scroll left top;
 	position: absolute;
@@ -31,6 +94,7 @@
 .lNavBar{
 	position: relative;
 	float: left;
+    padding: 0 13px;
 }
 
 .pearTitle {
@@ -52,7 +116,7 @@ font-size: 0.7em !important;
 background:transparent url('top_bar_bg.png') repeat-x 100% -12px;
 position: relative;
 height: 37px;
-padding-top: 10px;
+padding: 10px 0 0;
 overflow: hidden;
 text-shadow: 0 -1px 2px #111111;
 font-weight: bold;
@@ -230,7 +294,7 @@ left: -24px;
 top: -4px;
 cursor: pointer; /* hand-shaped cursor */
 cursor: hand; /* for IE 5.x */
-background: url(smaller.png) top center no-repeat;
+background: url('sliderView.png') -16px 0 no-repeat;
 }
 
 .sliderView .larger {
@@ -242,7 +306,7 @@ top: -4px;
 left: 133px;
 cursor: pointer; /* hand-shaped cursor */
 cursor: hand; /* for IE 5.x */
-background: url(larger.png) top center no-repeat;
+background: url('sliderView.png') 0 0 no-repeat;
 }
 
 /*.sliderView .sliderLeftCap {
@@ -385,8 +449,7 @@ color: #ffffff;
 	font-weight:bold;
 /*	overflow:hidden;
 */	position:relative;
-    margin:0px auto;
-  	margin-top:16px;
+  	margin:10px auto;
 	text-align:center;
 	text-shadow:black 0px 0px 1px;
 	white-space:nowrap;
@@ -439,7 +502,7 @@ color: #ffffff;
 #detailView .imageContainer {
 	text-align: center;
 /*	margin: 69px 69px 0px 69px;*/
-	margin-top: 32px;
+	margin-top: 40px;
 	cursor: pointer;
 }
 
@@ -499,189 +562,157 @@ color: #ffffff;
 
 
 /************************ HOVER VIEW **************************/
-
-#hoverView {
-	height: 58px;
-	position: absolute;
-	bottom: 30px;
-	width: 99%;
-	text-align: center;
-	z-index: 999;
+#hoverView, #hoverViewTop {
+  text-align:center;
+  width:100%;
+  position: absolute;
+  bottom: 20px;
 }
 
-#hoverView #hoverViewMenu {
-	margin: 0 auto;
-	position: relative;
-	width: 262px;
-	height: 58px;
-	width: 300px;
-	height: 60px;
-	background: url('hud_control/controlsbg.png') top left no-repeat;
+#hoverViewMenu, .hoverViewTopMenu {
+  background-color:#444;
+  border-radius:10px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  display:inline-block;
+  margin-left:auto;
+  margin-right:auto;
+  padding:0 5px;
+  background-image:url('footer_bg.png');
+  padding:4px 15px;
+  z-index: 40;
 }
 
-#hoverView .download_detail_disabled {
-	position: absolute;
-	top: 0px;
-	top: 10px;
-	left: 9px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/download_disabled.png') top left no-repeat;
+#mosaicHover {
+    z-index: 30;
+}
+.hoverViewTopMenu {
+  margin: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
-#hoverView .download_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 10px;
-	left: 9px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/download.png') top left no-repeat;
+#hoverViewMenu > .controller, .hoverViewTopMenu > .controller {
+  background-image:url('controller.png');
+  background-repeat:no-repeat;
+  height:41px;
+  width:40px;
+  display:inline-block;
+  margin:5px 1px 0;
+  cursor: pointer;
+}
+.controller.disabled, .controller.disable {
+  cursor: default !important;
 }
 
-#hoverView .download_detail:hover {
-	background: url('hud_control/download_over.png') top left no-repeat;
+#close { background-position: 0 0;}
+#close:hover { background-position: 0 -41px;}
+#close.disabled { background-position: 0 -82px;}
+
+#download { background-position:-40px 0; }
+#download:hover { background-position:-40px -41px; }
+#download.disabled { background-position:-40px -82px; }
+
+#prev { background-position:-80px 0; }
+#prev:hover { background-position:-80px -41px; }
+#prev.disabled { background-position:-80px -82px; }
+
+#pause_detail { background-position:-120px 0; }
+#pause_detail:hover { background-position:-120px -41px; }
+#pause_detail.disabled { background-position:-120px -82px; }
+
+#play_detail { background-position:-160px 0; }
+#play_detail:hover { background-position:-160px -41px; }
+#play_detail.disabled { background-position:-160px -82px; }
+
+#next { background-position:-200px 0; }
+#next:hover { background-position:-200px -41px; }
+#next.disabled { background-position:-200px -82px; }
+
+#info { background-position:-240px 0; }
+#info:hover { background-position:-240px -41px; }
+#info.disabled { background-position:-240px -82px; }
+
+#comment { background-position:-280px 0; }
+#comment:hover { background-position:-280px -41px; }
+#comment.disabled { background-position:-280px -82px; }
+
+#hoverviewmenu > .controller.hidden,#hoverviewmenu > .controller.hidden:hover { display:none; }
+
+#hoverviewmenu > .controller.half, .hoverViewTopMenu > .controller.half {
+  background-size: 160px;
+  -moz-background-size: 160px;
+  height:20px;
+  width:20px;
+  margin: 2px 1px 0;
 }
 
-#hoverView .prev_detail_disabled {
-	position: absolute;
-	top: 0px;
-	top: 18px;
-	left: 82px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/prev_disabled.png') top left no-repeat;
-}
+#close .half { background-position: 0 0;}
+#close.half:hover { background-position: 0 -20px;}
+#close.half.disable { background-position: 0 -41px;}
 
-#hoverView .prev_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 18px;
-	left: 82px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/prev.png') top left no-repeat;
-}
+#download.half { background-position:-20px 0; }
+#download.half:hover { background-position:-20px -20px; }
+#download.half.disable { background-position:-20px -41px; }
 
-#hoverView .prev_detail:hover {
-	background: url('hud_control/prev_over.png') top left no-repeat;
-}
+#prev.half { background-position:-40px 0; }
+#prev.half:hover { background-position:-40px -20px; }
+#prev.half.disable { background-position:-40px -41px; }
 
-#hoverView .play_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 10px;
-	left: 134px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/play.png') top left no-repeat;
-}
+#pause.half { background-position:-60px 0; }
+#pause.half:hover { background-position:-60px -20px; }
+#pause.half.disable { background-position:-60px -41px; }
 
-#hoverView .play_detail:hover {
-	background: url('hud_control/play_over.png') top left no-repeat;
-}
+#play.half { background-position:-80px 0; }
+#play.half:hover { background-position:-80px -20px; }
+#play.half.disable { background-position:-80px -41px; }
 
-#hoverView .pause_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 10px;
-	left: 134px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/pause.png') top left no-repeat;
-}
+#next.half { background-position:-100px 0; }
+#next.half:hover { background-position:-100px -20px; }
+#next.half.disable { background-position:-100px -41px; }
 
-#hoverView .pause_detail:hover {
-	background: url('hud_control/pause_over.png') top left no-repeat;
-}
+#info.half { background-position:-120px 0; }
+#info.half:hover { background-position:-120px -20px; }
+#info.half.disable { background-position:-120px -41px; }
 
-#hoverView .next_detail_disabled {
-	position: absolute;
-	top: 0px;
-	top: 18px;
-	left: 177px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/next_disabled.png') top left no-repeat;
-}
+#comment.half { background-position:-140px 0; }
+#comment.half:hover { background-position:-140px -20px; }
+#comment.half.disable { background-position:-140px -41px; }
 
-#hoverView .next_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 18px;
-	left: 177px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/next.png') top left no-repeat;
-}
+#detail_close .half { background-position: 0 0;}
+#detail_close.half:hover { background-position: 0 -20px;}
+#detail_close.half.disable { background-position: 0 -41px;}
 
-#hoverView .next_detail:hover {
-	background: url('hud_control/next_over.png') top left no-repeat;
-}
+#detail_download.half { background-position:-20px 0; }
+#detail_download.half:hover { background-position:-20px -20px; }
+#detail_download.half.disable { background-position:-20px -41px; }
 
+#detail_prev.half { background-position:-40px 0; }
+#detail_prev.half:hover { background-position:-40px -20px; }
+#detail_prev.half.disable { background-position:-40px -41px; }
 
-#hoverView #comment_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	left: 209px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/comment.png') top left no-repeat;
-	padding-top: 18px;
-	text-align: center;
-	font-size: 12px;
-	font-weight: bold;
-}
+#detail_pause.half { background-position:-60px 0; }
+#detail_pause.half:hover { background-position:-60px -20px; }
+#detail_pause.half.disable { background-position:-60px -41px; }
 
-.japanese #hoverView #comment_detail {
-	font-size: 11px;
-}
+#detail_play.half { background-position:-80px 0; }
+#detail_play.half:hover { background-position:-80px -20px; }
+#detail_play.half.disable { background-position:-80px -41px; }
 
-#hoverView #comment_detail:hover {
-	background: url('hud_control/comment_over.png') top left no-repeat;
-}
+#detail_next.half { background-position:-100px 0; }
+#detail_next.half:hover { background-position:-100px -20px; }
+#detail_next.half.disable { background-position:-100px -41px; }
 
-#hoverView .info_detail_selected {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 10px;
-	left: 240px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/info_over.png') top left no-repeat;
-}
+#detail_info.half { background-position:-120px 0; }
+#detail_info.half:hover { background-position:-120px -20px; }
+#detail_info.half.disable { background-position:-120px -41px; }
 
-#hoverView .info_detail {
-  	cursor: pointer; /* hand-shaped cursor */
-  	cursor: hand; /* for IE 5.x */
-	position: absolute;
-	top: 0px;
-	top: 10px;
-	left: 240px;
-	height: 58px;
-	width: 43px;
-	background: url('hud_control/info.png') top left no-repeat;
-}
+#detail_comment.half { background-position:-140px 0; }
+#detail_comment.half:hover { background-position:-140px -20px; }
+#detail_comment.half.disable { background-position:-140px -41px; }
 
-#hoverView .info_detail:hover {
-	background: url('hud_control/info_over.png') top left no-repeat;
-}
-
-
+#hoverviewmenu > .controller.half.hidden,#hoverviewmenu > .controller.half.hidden:hover { display:none; }
 /* ******************** Button Alts *************** */
 #backToAlbumLink {
 	left: 24px;
@@ -760,4 +791,57 @@ button.active-with-large-with-push img {
 button.large-with-push:active .outer,
 button.active-with-large-with-push .outer {
 		background: transparent url('button_left.png') no-repeat scroll  left -106px;
+}
+
+button.new::-moz-focus-inner {
+  border: none;  /* overrides extra padding in Firefox */
+}
+
+button.new span { 
+  position: relative;
+  display: block; 
+  white-space: nowrap;  
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  /* Safari and Google Chrome only - fix margins */
+  button.new span {
+    margin-top: -1px;
+  }
+}
+
+button.new {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  overflow: visible;
+  padding: 0 3px 0 0;
+  margin: 0 5px;
+  /* font-family: arial, helvetica, clean, sans-serif;
+  font-size: 10px;*/
+  text-align: center;
+  background: transparent url(button.png) no-repeat right -35px;
+}
+
+button.new span {
+  padding: 0 10px 0 13px;
+  margin: 0 6px 0 -3px;
+  height:35px;
+  background: transparent url(button.png) no-repeat left -35px;
+  color:#000;
+  line-height: 32px;
+}
+
+button.new span:hover {
+  background-position: left 0;
+}
+button.new:hover {
+  background-position: right 0;
+}
+
+button.new span:active {
+  background-position: left -140px;
+}
+button.new:active {
+  background-position: right -140px;
 }
