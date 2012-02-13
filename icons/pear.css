@@ -21,6 +21,13 @@
     position: absolute;
 }
 
+#imgMenu {
+    position: absolute !important;
+    left: 10px;
+    right: 10px;
+    text-align: left;
+}
+
 #gridContainer {
     position: absolute;
     right: 0;
