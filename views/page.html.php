@@ -83,7 +83,7 @@ if (isset($_GET['ajax'])) {
     <?= $theme->script("imageflow.packed.js") ?>
     <?= $theme->css("yui/reset-fonts-grids.css") ?>
     <?= $theme->css("superfish/css/superfish.css") ?>
-    <?= $theme->css("dark-hive/jquery.ui.all.css") ?>
+    <?= $theme->css("ui-pear-theme/jquery-ui-1.8.17.custom.css") ?>
     <?= $theme->css("screen.css") ?>
     <?= $theme->css("imageflow.packed.css") ?>
     <!--[if lte IE 8]>
