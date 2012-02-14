@@ -96,12 +96,13 @@
 	position: relative;
 	float: right;
 	top: -22px;
+    padding: 0 5px;
 }
 
 .lNavBar{
 	position: relative;
 	float: left;
-    padding: 0 13px;
+    padding: 0 5px;
 }
 
 .pearTitle {
@@ -720,135 +721,4 @@ color: #ffffff;
 #detail_comment.half.disable { background-position:-140px -41px; }
 
 #hoverviewmenu > .controller.half.hidden,#hoverviewmenu > .controller.half.hidden:hover { display:none; }
-/* ******************** Button Alts *************** */
-#backToAlbumLink {
-	left: 24px;
-	float: left;
-	position: absolute;
-	top: 13px;
-	white-space: nowrap;
-}
 
-#backToAlbumButton .outer{
-	min-width: 108px !important;
-}
-
-button.push {
-	background: transparent none repeat scroll 0%;
-	margin: 0px;
-	padding-right: 0px;
-	border: medium none;
-	height: 34px;
-	min-width: 80px;
-	outline-color: invert;
-	outline-style: none;
-	outline-width: medium;
-	padding-left: 20px;
-	vertical-align: baseline;
-}
-
-button.push .outer {
-	display: block;
-	padding: 0px 4px 0px 2px;
-	position: relative:
-	width: 100%;
-}
-
-button.large-with-push {
-  	cursor: pointer ;
-  	position: relative ;
-}
-
-button.large-with-push .label {
-	font-weight: bold;
-	line-height: 13px ;
-	height: 18px;
-	padding: 7px 25px 10px 20px;
-	margin-left: 6px;
-	text-indent: -14px;
-	background: transparent url('button_right.png') no-repeat scroll right -71px;
-	right: -6px;
-	color: #E0E0E0;
-	text-shadow: #1E1E1E 0px 0px 2px;
-}
-
-button.large-with-push .outer {
-	height: 34px;
-	padding-left: 2px;
-	margin-left: -3px;
-	background: transparent url('button_left.png') no-repeat scroll  0px -71px;
-	
-}
-
-button.large-with-push:active .label, 
-button.active-with-large-with-push .label{
-
-	color: #939393;
-	text-shadow: black 0px 0px 0px;	
-	background: transparent url('button_right.png') no-repeat scroll right -106px ;
-}
-
-button.large-with-push:active img, 
-button.active-with-large-with-push img {
-	opacity: .5;
-	filter: alpha(opacity=50);
-}
-
-
-button.large-with-push:active .outer,
-button.active-with-large-with-push .outer {
-		background: transparent url('button_left.png') no-repeat scroll  left -106px;
-}
-
-button.new::-moz-focus-inner {
-  border: none;  /* overrides extra padding in Firefox */
-}
-
-button.new span { 
-  position: relative;
-  display: block; 
-  white-space: nowrap;  
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  /* Safari and Google Chrome only - fix margins */
-  button.new span {
-    margin-top: -1px;
-  }
-}
-
-button.new {
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  overflow: visible;
-  padding: 0 3px 0 0;
-  margin: 0 5px;
-  /* font-family: arial, helvetica, clean, sans-serif;
-  font-size: 10px;*/
-  text-align: center;
-  background: transparent url(button.png) no-repeat right -35px;
-}
-
-button.new span {
-  padding: 0 10px 0 13px;
-  margin: 0 6px 0 -3px;
-  height:35px;
-  background: transparent url(button.png) no-repeat left -35px;
-  color:#000;
-  line-height: 32px;
-}
-
-button.new span:hover {
-  background-position: left 0;
-}
-button.new:hover {
-  background-position: right 0;
-}
-
-button.new span:active {
-  background-position: left -140px;
-}
-button.new:active {
-  background-position: right -140px;
-}

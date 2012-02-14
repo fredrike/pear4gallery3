@@ -128,11 +128,11 @@ if (isset($_GET['ajax'])) {
     <? if(!empty($parents)): ?>
       <? foreach ($parents as $parent): ?>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) $parent = end($parents); ?>
-        <button class="large push large-with-push" onclick="window.location='<?= $parent->url() ?>' + getAlbumHash(0);"> <div class="outer"> <div class="label"> <?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></div> </div></button>
+        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="window.location='<?= $parent->url() ?>' + getAlbumHash(0);"> <span class="ui-button-text"><?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></span> </button>
       <? if (!module::get_var("th_pear4gallery3", "show_breadcrumbs")) break; ?>
       <? endforeach ?>
     <? elseif (!($theme->item() && $theme->item()->id == item::root()->id)): ?>
-        <button class="large push large-with-push" onclick="window.location='<?= item::root()->url() ?>' + getAlbumHash(0);"> <div class="outer"> <div class="label"> <?= t("go back to the Gallery home")->for_html_attr() ?></div> </div></button>
+        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="window.location='<?= item::root()->url() ?>' + getAlbumHash(0);"> <span class="ui-button-text"><?= html::purify(text::limit_chars($parent->title, module::get_var("gallery", "visible_title_length"))) ?></span> </button>
     <? endif ?>
     </div>
 <? if ($theme->item()): ?>
@@ -155,7 +155,7 @@ if (isset($_GET['ajax'])) {
     </div>
 <? endif ?>
     <div class="rNavBar">
-        <button class="large push large-with-push" onclick="$('#g-header').slideToggle('normal', function(){$('#g-header').is(':hidden') ? $('#sidebarButton').text('Show Options') : $('#sidebarButton').text('Hide Options')});//);toggleSidebar('ContentAlbum','sidebar'); return false;"> <div class="outer"> <div class="label" id="sidebarButton">Show Options</div></div></button>
+        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="$('#g-header').slideToggle('normal', function(){$('#g-header').is(':hidden') ? $('#sidebarButton').text('Show Options') : $('#sidebarButton').text('Hide Options')});"> <span class="ui-button-text">Show Options</span> </button>
     </div>
 </div>
 <div id="g-header" class="ui-helper-clearfix" style="display: none;">
