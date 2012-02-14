@@ -15,7 +15,7 @@
       <? $item_class = "g-video\" onclick=\"window.location='".$child->url()."';"; ?>
       <? $img_class = "g-thumbnail p-movie"; ?>
     <? endif ?>
-  <div id="g-thumb-id-<?= $child->id ?>" class="g-item gallery-thumb <?= $item_class ?>" title="<?= $child->description?>">
+  <div id="g-item-id-<?= $child->id ?>" class="g-item gallery-thumb <?= $item_class ?>" title="<?= $child->description?>">
     <?= $theme->thumb_top($child) ?>
     <? if ($child->is_album() || $child->is_movie()): ?>
         <div class="gallery-thumb-round"></div>

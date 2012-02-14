@@ -61,8 +61,7 @@ function thumbLoad(index) {
     if ($(".g-context-menu").length) {
         $(".g-context-menu li").addClass("ui-state-default");
         $(".g-context-menu a").addClass("g-button ui-icon-left");
-        $(".g-context-menu a span.ui-icon").remove();
-        $(".g-context-menu a").prepend("<span class=\"ui-icon\"></span>");
+        $(".g-context-menu a:not(:has(span.ui-icon))").prepend("<span class=\"ui-icon\"></span>");
         $(".g-context-menu a span").each(function() {
                 /*jslint regexp: false*/
                 var iconClass = $(this).parent().attr("class").match(/ui-icon-.[^\s]+/).toString();
@@ -307,6 +306,7 @@ function swatchImg(imageId) {
                 $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
                 $('#mosaicImg').attr('src',  slideshowImages[imageId][0]);
                 $('#mosaicImg').css('cursor', "pointer");
+                mosaicResize();
                 $('#mosaicDetail').show();
             });
         }
@@ -317,6 +317,7 @@ function swatchImg(imageId) {
                 $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
                 $('#mosaicImg').attr('src',  slideshowImages[imageId][0]);
                 $('#mosaicImg').css('cursor', "pointer");
+                mosaicResize();
                 $('#mosaicDetail').show(pear.mosaicEffect, options, "slow");
             });
         }
@@ -592,7 +593,7 @@ function pearInit(options) {
 
     $('#mosaicDetailContainer').hover(function () {
         $(this).addClass("g-photo hovering");
-        $(this).prepend($('.g-item:not(.g-hover-item)>ul').slice(pear.currentImg, pear.currentImg+1).clone().attr("id", "imgMenu"));
+        $(this).prepend($('.g-item:not(.g-hover-item)>ul').slice(pear.currentImg, pear.currentImg+1).clone().attr("id", "imgMenu").removeAttr("context_menu_initialized"));
         $(this).gallery_context_menu();
         $.fn.gallery_hover_init();},
         function () {
@@ -638,13 +639,13 @@ function sidebarInit(mode) {
             $('#sidebarContainer').width(5);
             $('#mosaicTable').css('right', '5px');
             $('#sidebarContainer').hover(function () {
-                    $('#sidebarContainer').animate( { width: '225' }, 500);
+                    $('#sidebarContainer').stop(true,true).animate( { width: '225' }, 500);
                     //$('#sidebar').show('slide', { direction: 'right'}, 1000);
-                    $('#mosaicTable').animate( { right: '225'}, 500, function () { mosaicResize(); }); },
+                    $('#mosaicTable').stop(true,true).animate( { right: '225'}, 500, function () { mosaicResize(); }); },
                 function () {
-                    $('#sidebarContainer').animate( { width: '5' }, 500);
+                    $('#sidebarContainer').stop(true,true).animate( { width: '5' }, 500);
                     //$('#sidebar').hide('slide', { direction: 'right'}, 1000);
-                    $('#mosaicTable').animate( { right: '5' }, 500, function () { mosaicResize(); });
+                    $('#mosaicTable').stop(true.true).animate( { right: '5' }, 500, function () { mosaicResize(); });
                 });
             break;
         case 'static':

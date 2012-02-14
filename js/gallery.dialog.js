@@ -7,7 +7,11 @@
            this.element.unbind('click');
            this.element.click(function(event) {
            event.preventDefault();
-           self._show($(event.currentTarget).attr("href"));
+           if($(this).filter('.info_detail').length) {
+               self._show($(event.currentTarget).attr("href"),"Title:"+ $('.g-item:not(.g-hover-item)>p').slice(pear.currentImg,pear.currentImg+1).html() + "<br/>Description: "+ $('.g-item:not(.g-hover-item)').slice(pear.currentImg,pear.currentImg+1).attr('title'));
+           } else {
+               self._show($(event.currentTarget).attr("href"));
+           }
            return false;
          });
        } else {
@@ -15,7 +19,7 @@
        }
      },
 
-     _show: function(sHref) {
+     _show: function(sHref, prepend) {
        var self = this;
        var eDialog = '<div id="g-dialog"></div>';
 
@@ -28,6 +32,8 @@
          self.options.close = self.close_dialog;
        }
        $("#g-dialog").dialog(self.options);
+
+       $("#g-dialog").html(prepend);
 
        $("#g-dialog").gallery_show_loading();
 
@@ -54,7 +60,7 @@
              content = data;
            }
 
-           $("#g-dialog").html(content).gallery_show_loading();
+           $("#g-dialog").append(content).gallery_show_loading();
 
            if ($("#g-dialog form").length) {
              self.form_loaded(null, $("#g-dialog form"));
@@ -91,6 +97,7 @@
          dialogWidth = 500;
        }
        $("#g-dialog").dialog('option', 'width', dialogWidth);
+       $('#g-dialog').dialog( "option", "position", 'center' );
      },
 
      form_loaded: function(event, ui) {
