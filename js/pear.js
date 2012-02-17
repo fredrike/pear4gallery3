@@ -337,7 +337,8 @@ function swatchImg(imageId) {
     $('#img_detail').hide();
     /* Update image and title in focus view */
     $('#img_detail').attr('src', slideshowImages[pear.currentImg][0]);
-    $('.info_detail').attr('href', slideshowImages[pear.currentImg][1]);
+    $('.info_detail').attr('href', slideshowImages[pear.currentImg][1][0] + "pear/about/" + slideshowImages[pear.currentImg][1][1]);
+    $('.comments_detail').attr('href', slideshowImages[pear.currentImg][1][0] + "pear/show_comments/" + slideshowImages[pear.currentImg][1][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
     if ( slideshowImages[pear.currentImg][5] === '' ) {
         $('#download').hide();
@@ -657,3 +658,11 @@ function sidebarInit(mode) {
     }
 }
 
+(function($){
+$.gallery_replace_image = function(data, img_selector) {
+    $(img_selector).attr({src: data.src});
+    // Update geometrics in slideshowImages[INDEX].
+    // Reload the focused image.
+    $(img_selector).trigger("gallery.change");
+  };
+})(jQuery);

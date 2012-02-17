@@ -7,11 +7,7 @@
            this.element.unbind('click');
            this.element.click(function(event) {
            event.preventDefault();
-           if($(this).filter('.info_detail').length) {
-               self._show($(event.currentTarget).attr("href"),"Title:"+ $('.g-item:not(.g-hover-item)>p').slice(pear.currentImg,pear.currentImg+1).html() + "<br/>Description: "+ $('.g-item:not(.g-hover-item)').slice(pear.currentImg,pear.currentImg+1).attr('title'));
-           } else {
-               self._show($(event.currentTarget).attr("href"));
-           }
+           self._show($(event.currentTarget).attr("href"));
            return false;
          });
        } else {
@@ -19,7 +15,7 @@
        }
      },
 
-     _show: function(sHref, prepend) {
+     _show: function(sHref) {
        var self = this;
        var eDialog = '<div id="g-dialog"></div>';
 
@@ -32,8 +28,6 @@
          self.options.close = self.close_dialog;
        }
        $("#g-dialog").dialog(self.options);
-
-       $("#g-dialog").html(prepend);
 
        $("#g-dialog").gallery_show_loading();
 
@@ -60,7 +54,11 @@
              content = data;
            }
 
-           $("#g-dialog").append(content).gallery_show_loading();
+           $("#g-dialog").html(content).gallery_show_loading();
+           $("#g-add-comment").gallery_dialog();
+           
+           $("#g-dialog").find(".g-dialog-link").gallery_dialog();
+           $("#g-dialog").find(".g-ajax-link").gallery_ajax();
 
            if ($("#g-dialog form").length) {
              self.form_loaded(null, $("#g-dialog form"));
@@ -160,11 +158,19 @@
              }
            }
            if (data.result == "success") {
+             if (data.view && data.form) {
+               $("#detail_comment").click();
+               return;
+             }
              if (data.location) {
                window.location = data.location;
              } else {
                window.location.reload();
              }
+           }
+           else {
+             $("#g-dialog").dialog('option', 'title', 'Error');
+             $("#g-dialog").html("Something went wrong, try again later.");
            }
          }
        });

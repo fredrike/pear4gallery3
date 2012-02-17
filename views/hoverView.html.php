@@ -16,7 +16,7 @@
     <div class="hoverViewTopMenu">
         <div id="download" title="Download this photo" class="controller half" onclick="window.open(slideshowImages[pear.currentImg][5])"> </div>
         <div id="info" title="Show more information about this photo" class="controller half info_detail g-dialog-link"> </div>
-        <div id="comment" title="Comments" class="controller half disable" onclick=""></div>
+        <? if(module::is_active("comment")): ?><div id="comment" title="Comments" class="controller half comments_detail g-dialog-link" onclick=""></div><?endif ?>
         <div id="close" title="Close" class="controller half" onclick="hideDetailView();"></div>
     </div>
 	</div>
