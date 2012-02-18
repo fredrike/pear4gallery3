@@ -341,9 +341,9 @@ function swatchImg(imageId) {
     $('.comments_detail').attr('href', slideshowImages[pear.currentImg][1][0] + "pear/show_comments/" + slideshowImages[pear.currentImg][1][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
     if ( slideshowImages[pear.currentImg][5] === '' ) {
-        $('#download').hide();
+        $('#download, #detail_download').hide();
     } else {
-        $('#download').show();
+        $('#download, #detail_download').show();
     }
     updateHash();
     mosaicResize();

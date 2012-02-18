@@ -86,6 +86,7 @@ if (isset($_GET['ajax'])) {
     <?= $theme->css("ui-pear-theme/jquery-ui-1.8.17.custom.css") ?>
     <?= $theme->css("screen.css") ?>
     <?= $theme->css("imageflow.packed.css") ?>
+    <?= $theme->css("pear.css") ?>
     <!--[if lte IE 8]>
     <link rel="stylesheet" type="text/css" href="<?= $theme->url("css/fix-ie.css") ?>"
           media="screen,print,projection" />
@@ -96,8 +97,6 @@ if (isset($_GET['ajax'])) {
 
     <!-- LOOKING FOR YOUR CSS? It's all been combined into the link below -->
     <?= $theme->get_combined("css") ?>
-		<link rel="stylesheet" type="text/css" href="<?= $theme->url("css/pear.css") ?>" media="screen,print,projection" />
-		<link rel="stylesheet" type="text/css" href="<?= $theme->url("icons/pear.css") ?>" media="screen,print,projection" />
 		<script type="text/javascript" src="<?= $theme->url("js/pear.js"); ?>"></script>
 		<!-- Google analytics code -->
 		<script type="text/javascript">
