@@ -99,6 +99,7 @@
        // Should be defined (and localized) in the theme
        MSG_CANCEL = MSG_CANCEL || 'Cancel';
        var eCancel = '<a href="#" class="g-cancel g-left">' + MSG_CANCEL + '</a>';
+       $("#g-dialog input[type=submit]").addClass("submit");
        if ($("#g-dialog .submit").length) {
          $("#g-dialog .submit").addClass("ui-state-default ui-corner-all");
          $.fn.gallery_hover_init();
