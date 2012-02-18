@@ -56,9 +56,6 @@
 
            $("#g-dialog").html(content).gallery_show_loading();
            $("#g-add-comment").gallery_dialog();
-           
-           $("#g-dialog").find(".g-dialog-link").gallery_dialog();
-           $("#g-dialog").find(".g-ajax-link").gallery_ajax();
 
            if ($("#g-dialog form").length) {
              self.form_loaded(null, $("#g-dialog form"));
@@ -111,6 +108,7 @@
            event.preventDefault();
          });
         }
+       $("#g-dialog textarea,#g-dialog input").addClass("ui-widget-content ui-corner-all");
        $("#g-dialog .ui-state-default").hover(
          function() {
            $(this).addClass("ui-state-hover");

@@ -141,39 +141,11 @@ input[type="hidden"] {
   display: none;
 }
 
-input.textbox,
-input[type="text"],
-input[type="password"],
-textarea {
-  border: 1px solid #e8e8e8;
-  border-top-color: #ccc;
-  border-left-color: #ccc;
-  clear: both;
-  color: #333;
-  width: 50%;
-}
-
 textarea {
   height: 12em;
   width: 97%;
 }
 
-input:focus,
-input.textbox:focus,
-input[type=text]:focus,
-textarea:focus,
-option:focus {
-  background-color: #ffc;
-  color: #000;
-}
-
-input.checkbox,
-input[type=checkbox],
-input.radio,
-input[type=radio] {
-  float: left;
-  margin-right: .4em;
-}
 
 /* Form layout ~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
