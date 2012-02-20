@@ -520,7 +520,7 @@ document = null;
 */
     $(document).keydown(function (e) {
         var charCode = e.keyCode || e.which;
-        if ($( document.activeElement ).is("input:text,input:password")) { return; }
+        if ($( document.activeElement ).is("input:text,input:password,textarea")) { return; }
         switch (charCode) {
         case 32: /* Space */
             if (pear.slideShowMode) { togglePlayPause(); }
