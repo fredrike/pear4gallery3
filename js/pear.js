@@ -204,7 +204,7 @@ function mosaicResize() {
     /* Fix for firefox that don't support dimensions on empty img tags */
     $('#mosaicImg').css('display', 'inline-block');
     /* Vertical center of image in mosaicView */
-    siteTop = $('#mosaicTable').height() / 2 - $('#mosaicDetailContainer').height() / 2;
+    siteTop = $('#mosaicTable').height() / 2 - ($("#imageTitle").attr("savedH") + $("#mosaicImg").height()) / 2;
     siteTop = siteTop < 0 ? 0 : siteTop;
     $('#mosaicDetailContainer').css('top', siteTop);
 
@@ -301,6 +301,7 @@ function swatchImg(imageId) {
     pear.currentImg = imageId;
 
     if (pear.currentView === 'mosaic') {
+        $('#imageTitle').each(function (i) {$(this).html("<h2></h2>"); $(this).attr("savedH", $(this).height()); });
         if ( pear.mosaicEffect === "" ) {
             $('#mosaicDetail').hide(0, function () {
                 $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
