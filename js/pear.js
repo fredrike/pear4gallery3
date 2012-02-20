@@ -481,6 +481,7 @@ function switchToMosaic() {
     switchMode('mosaic');
     swatchImg(pear.currentImg);
     mosaicResize();
+    $(".controller").css("display","inline-block");
 }
 
 function startImageFlow() {
