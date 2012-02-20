@@ -257,7 +257,7 @@ function swatchSkin(intSkin) {
     case 'ltgrey':
     case 2:
         $('div.gallery-thumb-round').css('backgroundPosition', "-400px 0px");
-        $('body,html.#pearFlow').css('backgroundColor', "#d9d9d9");
+        $('body,html,#pearFlow').css('backgroundColor', "#d9d9d9");
         $('p.giTitle').css("color", "#333333");
         $("#ltgrey").addClass("ltgrey sel ltgrey-with-sel-with-swatch");
         pear.currentBg = "ltgrey";
@@ -650,6 +650,8 @@ function sidebarInit(mode) {
                 });
             break;
         case 'static':
+            $('#sidebarContainer').width(225);
+            $('#mosaicTable').css('right', '225px');
             break;
         //case 'hidden':
         default:
