@@ -344,6 +344,8 @@ function swatchImg(imageId) {
     $('.info_detail').attr('href', pear.sitePath + "pear/about/" + slideshowImages[pear.currentImg][1]);
     $('.comments_detail').attr('href', pear.sitePath + "pear/show_comments/" + slideshowImages[pear.currentImg][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
+    $(".controller").css("display","inline");
+    $(".controller").css("display","inline-block");
     if ( slideshowImages[pear.currentImg][5] === '' ) {
         $('#download, #detail_download').hide();
     } else {
@@ -484,7 +486,6 @@ function switchToMosaic() {
     switchMode('mosaic');
     swatchImg(pear.currentImg);
     mosaicResize();
-    $(".controller").css("display","inline-block");
 }
 
 function startImageFlow() {
