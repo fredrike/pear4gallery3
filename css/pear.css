@@ -203,8 +203,7 @@ outline: medium none;
 }
 
 #sidebar {
-  border-left: 2px darkGrey solid;
-  width: 220px; 
+  border-left: 1px darkGrey solid;
   padding: 0;
   height: 100%;
   overflow-y: auto;

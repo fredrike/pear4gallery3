@@ -646,35 +646,39 @@ function pearInit(options) {
 
 function sidebarInit(mode) {
     $('#toggleSidebar').hide().off('click');
-    $('#sidebarContainer').off('hover');
+    $('#sidebarContainer').off('hover')
+        $('#sidebar').css('border-left-width', '1px');
     switch (mode) {
         case 'toggle':
-            $('#sidebar').width(5);
+            $('#sidebarContainer').width(5);
+        $('#sidebar').css('border-left-width', '5px');
             $('#mosaicTable').css('right', '5px');
             $('#sidebarContainer').hover(function () {
-                    $('#sidebar').stop(true,true).animate( { width: '225' }, 500);
+        $('#sidebar').css('border-left-width', '1px');
+                    $('#sidebarContainer').stop(true,true).animate( { width: '221' }, 500);
                     //$('#sidebar').show('slide', { direction: 'right'}, 1000);
-                    $('#mosaicTable').stop(true,true).animate( { right: '225'}, 500, function () { mosaicResize(); }); },
+                    $('#mosaicTable').stop(true,true).animate( { right: '221'}, 500, function () { mosaicResize(); }); },
                 function () {
-                    $('#sidebar').stop(true,true).animate( { width: '5' }, 500);
+        $('#sidebar').css('border-left-width', '5px');
+                    $('#sidebarContainer').stop(true,true).animate( { width: '5' }, 500);
                     //$('#sidebar').hide('slide', { direction: 'right'}, 1000);
                     $('#mosaicTable').stop(true.true).animate( { right: '5' }, 500, function () { mosaicResize(); });
                 });
             break;
         case 'static':
-            $('#sidebar').width(225);
-            $('#mosaicTable').css('right', '225px');
+            $('#sidebarContainer').width(221);
+            $('#mosaicTable').css('right', '221px');
             break;
         case 'button':
             $('#toggleSidebar').show();
             $('#toggleSidebar').click(function (){
                 $(this).toggleClass("ui-icon-plusthick ui-icon-minusthick");
                 if ( $(this).is('.ui-icon-plusthick')) {
-                    $('#sidebar').width(5);
-                    $('#mosaicTable').css('right', '5px');
+                    $('#sidebarContainer').width(1);
+                    $('#mosaicTable').css('right', '1px');
                 } else {
-                    $('#sidebar').width(225);
-                    $('#mosaicTable').css('right', '225px');
+                    $('#sidebarContainer').width(221);
+                    $('#mosaicTable').css('right', '221px');
                 }
             });
             $('#toggleSidebar').trigger('click');
