@@ -498,7 +498,15 @@ function startImageFlow() {
             $('#pearImageFlow').append(img);
         }
         pear.pearCarousel = new ImageFlow();
-        pear.pearCarousel.init({ImageFlowID: 'pearImageFlow', aspectRatio: 2.4, imagesHeight: 0.6, opacity: true, reflections: false, startID: pear.currentImg + 1, onClick: function () { focusImage($(this).attr('longdesc')); }, startAnimation: true, xStep: 200, imageFocusM: 1.7, imageFocusMax: 4, opacityArray: [10, 9, 6, 2], percentOther: 130, captions: false, slider: false});
+        pear.pearCarousel.init({ImageFlowID: 'pearImageFlow', 
+            aspectRatio: 2.4, imagesHeight: 0.6, 
+            opacity: true, reflections: false,
+            startID: pear.currentImg + 1, 
+            onClick: function () { focusImage($(this).attr('longdesc')); },
+            startAnimation: true, xStep: 200, imageFocusM: 1.0,
+            imageFocusMax: 4, opacityArray: [10, 9, 6, 2],
+            percentLandscape: 200, percentOther: 100,
+            captions: false, slider: false});
     }
     switchMode('carousel');
     mosaicResize();
