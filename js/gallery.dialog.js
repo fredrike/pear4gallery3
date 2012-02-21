@@ -55,7 +55,7 @@
            }
 
            $("#g-dialog").html(content).gallery_show_loading();
-           $("#g-add-comment").gallery_dialog();
+           $("#g-add-comment,#g-dialog .showCommentForm").gallery_dialog();
 
            if ($("#g-dialog form").length) {
              self.form_loaded(null, $("#g-dialog form"));
@@ -169,8 +169,15 @@
            }
            else {
              $("#g-dialog").dialog('option', 'title', 'Error');
-             $("#g-dialog").html("Something went wrong, try again later.");
+             if(data.form) {
+               $("#g-dialog").html(data.form);
+               self.form_loaded(null, $("#g-dialog form"));
+               self._ajaxify_dialog();
+             } else {
+               $("#g-dialog").html("Something went wrong, try again later.");
+             }
            }
+           $('#g-dialog').dialog( "option", "position", 'center' );
          }
        });
      },
