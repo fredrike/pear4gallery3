@@ -35,7 +35,7 @@ $(function() {
 </div>
 <? if (module::get_var("th_pear4gallery3", "sidebar_view") != ''): ?>
   <div id="sidebarContainer">
-    <div id="sidebarBorder"></div>
+    <span id="toggleSidebar" class="ui-icon ui-icon-plusthick ui-state-default ui-helper-clearfix ui-widget ui-corner-all" title="Toggle Sidebar"></span>
     <div id="sidebar">
     <? if ($theme->page_subtype != "login"): ?>
       <?= new View("sidebar.html") ?>

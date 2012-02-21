@@ -111,7 +111,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
       ->checked(module::get_var("th_pear4gallery3", "show_breadcrumbs"));
     $group->dropdown("sidebar_view")
       ->label(t("Show Sidebar mode"))
-      ->options(array("hidden" => t("Hidden (Default)"), "static" => t("Always visible"), "toggle" => t("Toggleable")))
+      ->options(array("hidden" => t("Hidden (Default)"), "static" => t("Always visible"), "toggle" => t("Hover"), "button" => t("Togglable via button")))
       ->selected(module::get_var("th_pear4gallery3", "sidebar_view"));
     $group->input("ga_code")
       ->label(t("<a href=\"http://www.google.com/analytics/\">Google analytics</a> code."))
