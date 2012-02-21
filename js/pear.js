@@ -646,20 +646,20 @@ function pearInit(options) {
 
 function sidebarInit(mode) {
     $('#toggleSidebar').hide().off('click');
-    $('#sidebarContainer').off('hover')
-        $('#sidebar').css('border-left-width', '1px');
+    $('#sidebarContainer').show().off('hover');
+    $('#sidebar').css('border-left-width', '1px');
     switch (mode) {
         case 'toggle':
             $('#sidebarContainer').width(5);
-        $('#sidebar').css('border-left-width', '5px');
+            $('#sidebar').css('border-left-width', '5px');
             $('#mosaicTable').css('right', '5px');
             $('#sidebarContainer').hover(function () {
-        $('#sidebar').css('border-left-width', '1px');
-                    $('#sidebarContainer').stop(true,true).animate( { width: '221' }, 500);
-                    //$('#sidebar').show('slide', { direction: 'right'}, 1000);
-                    $('#mosaicTable').stop(true,true).animate( { right: '221'}, 500, function () { mosaicResize(); }); },
+                $('#sidebar').css('border-left-width', '1px');
+                $('#sidebarContainer').stop(true,true).animate( { width: '221' }, 500);
+                //$('#sidebar').show('slide', { direction: 'right'}, 1000);
+                $('#mosaicTable').stop(true,true).animate( { right: '221'}, 500, function () { mosaicResize(); }); },
                 function () {
-        $('#sidebar').css('border-left-width', '5px');
+                    $('#sidebar').css('border-left-width', '5px');
                     $('#sidebarContainer').stop(true,true).animate( { width: '5' }, 500);
                     //$('#sidebar').hide('slide', { direction: 'right'}, 1000);
                     $('#mosaicTable').stop(true.true).animate( { right: '5' }, 500, function () { mosaicResize(); });
@@ -668,23 +668,30 @@ function sidebarInit(mode) {
         case 'static':
             $('#sidebarContainer').width(221);
             $('#mosaicTable').css('right', '221px');
+            mosaicResize();
             break;
         case 'button':
             $('#toggleSidebar').show();
-            $('#toggleSidebar').click(function (){
+            $('#toggleSidebar').off().click(function (){
                 $(this).toggleClass("ui-icon-plusthick ui-icon-minusthick");
                 if ( $(this).is('.ui-icon-plusthick')) {
                     $('#sidebarContainer').width(1);
                     $('#mosaicTable').css('right', '1px');
+                    setCookie('sidebarState', 'hidden', 1);
                 } else {
                     $('#sidebarContainer').width(221);
                     $('#mosaicTable').css('right', '221px');
+                    setCookie('sidebarState', 'shown', 1);
                 }
+                mosaicResize();
             });
-            $('#toggleSidebar').trigger('click');
+            var state = getCookie('sidebarState');
+            if( getCookie('sidebarState') === 'hidden' && $('#toggleSidebar').is('.ui-icon-plusthick')) {
+                $('#toggleSidebar').trigger('click');
+            }
             $('#toggleSidebar').trigger('click');
             break;
-        //case 'hidden':
+            //case 'hidden':
         default:
             $('#sidebarContainer').hide();
             $('#mosaicTable').css('right', '0');
