@@ -92,6 +92,10 @@
          dialogWidth = 500;
        }
        $("#g-dialog").dialog('option', 'width', dialogWidth);
+       var mosaicTableH = $("#mosaicTable").height();
+       if (mosaicTableH !== 0 && $("#g-dialog").height() > mosaicTableH) {
+         $("#g-dialog").dialog("option", "height", mosaicTableH);
+       }
        $('#g-dialog').dialog( "option", "position", 'center' );
      },
 
