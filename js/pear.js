@@ -4,6 +4,7 @@
 var savedHeight = savedWidth = 0;
 var pear = {defaultView: "grid",
     detailView: false,
+    sitePath: "/",
     defaultBg: "black",
     slideshowTimeout: 5000,
     currentImg: 0,
@@ -123,7 +124,9 @@ function loadMore() {
 function setCookie(c_name, value, expiredays) {
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + expiredays);
-    document.cookie = c_name + "=" + escape(value) + ((expiredays === null) ? "" : ";expires=" + exdate.toGMTString());
+    document.cookie = c_name + "=" +
+        escape(value) + ((expiredays === null) ? "" : ";expires=" + exdate.toGMTString()) +
+        "; path=" + pear.sitePath;
 }
 
 function getCookie(c_name) {
@@ -338,8 +341,8 @@ function swatchImg(imageId) {
     $('#img_detail').hide();
     /* Update image and title in focus view */
     $('#img_detail').attr('src', slideshowImages[pear.currentImg][0]);
-    $('.info_detail').attr('href', slideshowImages[pear.currentImg][1][0] + "pear/about/" + slideshowImages[pear.currentImg][1][1]);
-    $('.comments_detail').attr('href', slideshowImages[pear.currentImg][1][0] + "pear/show_comments/" + slideshowImages[pear.currentImg][1][1]);
+    $('.info_detail').attr('href', pear.sitePath + "pear/about/" + slideshowImages[pear.currentImg][1]);
+    $('.comments_detail').attr('href', pear.sitePath + "pear/show_comments/" + slideshowImages[pear.currentImg][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
     if ( slideshowImages[pear.currentImg][5] === '' ) {
         $('#download, #detail_download').hide();

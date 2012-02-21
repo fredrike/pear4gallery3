@@ -4,12 +4,13 @@
 var slideshowImages = new Array();
 var thumbImages = new Array();
 $(function() {
-  sidebarInit('<?=module::get_var("th_pear4gallery3", "sidebar_view")?>');
   pearInit( {
+    sitePath: "<?= url::site("/") ?>",
     defaultView: "<?=module::get_var("th_pear4gallery3", "mainmenu_view")?>",
     defaultBg: "<?=module::get_var("th_pear4gallery3", "background", "black")?>",
     mosaicEffect: "<? $mosaic_effect = module::get_var("th_pear4gallery3", "mosaic_effect", "blind"); if ($mosaic_effect == "none") print ""; else print $mosaic_effect; ?>",
     slideshowTimeout: <?=module::get_var("th_pear4gallery3", "slideshow_time", "5000")?> });
+  sidebarInit('<?=module::get_var("th_pear4gallery3", "sidebar_view")?>');
 });
 </script>
 <div id="mosaicTable">
