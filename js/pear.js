@@ -15,7 +15,7 @@ function thumbPadding() {
     var size, width, margin;
     /* Padding on thumbs to make them flow nicer */
     size = Math.ceil((pear.currentView === 'mosaic') ? $('#imgSlider').slider('value') / 2 : $('#imgSlider').slider('value')) + 10;
-    width = $('#gridContainer').innerWidth() - 16;
+    width = $('#gridContainer').width() - $.getScrollbarWidth() - 8;
     margin = width / Math.floor(width / size) - size;
     $('.gallery-thumb').css({'margin-left': Math.ceil(margin / 2) + 'px', 'margin-right': Math.floor(margin / 2) + 'px'});
 }
@@ -465,7 +465,6 @@ function switchToGrid() {
     $('#pearFlow').hide();
     if (!$('#gridContainer').length) { return; }
     scaleIt($('#imgSlider').slider('value'));
-    checkCookie();
     $('#mosaicDetail').hide();
     $('#gridContainer').css('width', "100%");
     $('p.giTitle,div.giInfo').each(function (s) { $(this).show(); });
@@ -479,7 +478,6 @@ function switchToMosaic() {
     $('#pearFlow').hide();
     if (!$('#gridContainer').length) { return; }
     scaleIt($('#imgSlider').slider('value'));
-    checkCookie();
     $('#mosaicDetail').show();
     $('#gridContainer').css('width', "35%");
     $('p.giTitle,div.giInfo').each(function (s) { $(this).hide(); });
@@ -635,17 +633,13 @@ function pearInit(options) {
     case 'carousel':
         startImageFlow();
         break;
-    case 'grid':
-        switchToGrid();
-        break;
     case 'mosaic':
         switchToMosaic();
         break;
     default:
-        mosaicResize();
-        checkCookie();
+        switchToGrid();
     }
-
+    checkCookie();
 }
 
 function sidebarInit(mode) {
@@ -666,7 +660,7 @@ function sidebarInit(mode) {
                     $('#sidebar').css('border-left-width', '5px');
                     $('#sidebarContainer').stop(true,true).animate( { width: '5' }, 500);
                     //$('#sidebar').hide('slide', { direction: 'right'}, 1000);
-                    $('#mosaicTable').stop(true.true).animate( { right: '5' }, 500, function () { mosaicResize(); });
+                    $('#mosaicTable').stop(true,true).animate( { right: '5' }, 500, function () { mosaicResize(); });
                 });
             break;
         case 'static':

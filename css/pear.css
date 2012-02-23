@@ -290,7 +290,8 @@ background:transparent url('../icons/footer_bg.png') top center;
 height:40px;
 clear:both; 
 z-index: 100;
-position: absolute;
+position: fixed;
+left: 0;
 bottom: 0;
 }
 

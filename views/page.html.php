@@ -57,6 +57,7 @@ if (isset($_GET['ajax'])) {
     <?= $theme->script("jquery.form.js") ?>
     <?= $theme->script("jquery-ui-1.8.17.custom.min.js") ?>
     <?= $theme->script("jquery.endless-scroll.js") ?>
+    <?= $theme->script("jquery.getscrollbarwidth.js") ?>
     <?= $theme->script("gallery.common.js") ?>
     <? /* MSG_CANCEL is required by gallery.dialog.js */ ?>
     <script type="text/javascript">

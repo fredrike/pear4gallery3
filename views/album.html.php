@@ -6,7 +6,7 @@ var thumbImages = new Array();
 $(function() {
   pearInit( {
     sitePath: "<?= url::site("/") ?>",
-    defaultView: "<?=module::get_var("th_pear4gallery3", "mainmenu_view")?>",
+    defaultView: "<?=module::get_var("th_pear4gallery3", "mainmenu_view", "grid")?>",
     defaultBg: "<?=module::get_var("th_pear4gallery3", "background", "black")?>",
     mosaicEffect: "<? $mosaic_effect = module::get_var("th_pear4gallery3", "mosaic_effect", "blind"); if ($mosaic_effect == "none") print ""; else print $mosaic_effect; ?>",
     slideshowTimeout: <?=module::get_var("th_pear4gallery3", "slideshow_time", "5000")?> });
