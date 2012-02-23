@@ -13,6 +13,7 @@ $(function() {
   sidebarInit('<?=module::get_var("th_pear4gallery3", "sidebar_view")?>');
 });
 </script>
+<div id="loading"></div>
 <div id="mosaicTable">
   <div id="mosaicDetail">
     <div id="mosaicHover" class="hoverViewTopMenu">

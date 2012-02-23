@@ -1,6 +1,19 @@
 body {
   overflow: hidden;
+  font-size: 10px;
+  color: #999 !important;
 }
+
+#loading {
+  background: #000 url(../icons/load.gif) no-repeat fixed 50%;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99998
+}
+
 .g-hover-item {
   border: 0 solid #000;
   position: relative !important;
@@ -42,10 +55,6 @@ th, td {
   margin-left: 12px;
   margin-right: 0;
   text-align: left;
-}
-.pear {
-  font-size: 10px;
-  color: #999 !important;
 }
 .giTitle {
   font-size: 1.1em;
@@ -537,7 +546,6 @@ cursor: default;
 #viewControls {
     position: relative;
     color: #616161;
-    width: 370px;
     float: left;
     padding-left: 30px;
     padding-top: 13px;
@@ -795,7 +803,7 @@ color: #fff;
 #comment:hover { background-position:-280px -41px; }
 #comment.disabled { background-position:-280px -82px; }
 
-#hoverviewmenu > .controller.hidden,#hoverviewmenu > .controller.hidden:hover { display:none; }
+.controller.hidden, .controller.hidden:hover { display:none !important}
 
 #hoverviewmenu > .controller.half, .hoverViewTopMenu > .controller.half {
   background-size: 160px;
@@ -868,6 +876,4 @@ color: #fff;
 #detail_comment.half { background-position:-140px 0; }
 #detail_comment.half:hover { background-position:-140px -20px; }
 #detail_comment.half.disable { background-position:-140px -41px; }
-
-#hoverviewmenu > .controller.half.hidden,#hoverviewmenu > .controller.half.hidden:hover { display:none; }
 

@@ -8,9 +8,9 @@
 		</div>
     <div id="hoverView" onmouseover="pear.hovering=true;" onmouseout="pear.hovering=false;">
     <div id="hoverViewMenu">
-  <div id="prev" title="(P)revious" class="controller"></div>
-    <div id="pause_detail" style="display: none;" title="Pause" class="controller" onclick="togglePlayPause();"> </div>
-    <div id="play_detail" style="display: none;" title="Play" class="controller" onclick="togglePlayPause();"> </div>
+      <div id="prev" title="(P)revious" class="controller"></div>
+      <div id="pause_detail" title="Pause" class="controller" onclick="togglePlayPause();"> </div>
+      <div id="play_detail" title="Play" class="controller" onclick="togglePlayPause();"> </div>
       <div id="next" title="(N)ext" class="controller"></div>
     </div></div>
     <div class="hoverViewTopMenu">

@@ -88,16 +88,16 @@ if (isset($_GET['ajax'])) {
     <?= $theme->css("screen.css") ?>
     <?= $theme->css("imageflow.packed.css") ?>
     <?= $theme->css("pear.css") ?>
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" type="text/css" href="<?= $theme->url("css/fix-ie.css") ?>"
-          media="screen,print,projection" />
-    <![endif]-->
 
     <!-- LOOKING FOR YOUR JAVASCRIPT? It's all been combined into the link below -->
     <?= $theme->get_combined("script") ?>
 
     <!-- LOOKING FOR YOUR CSS? It's all been combined into the link below -->
     <?= $theme->get_combined("css") ?>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="<?= $theme->url("css/fix-ie.css") ?>"/>
+    <![endif]-->
+
 		<script type="text/javascript" src="<?= $theme->url("js/pear.js"); ?>"></script>
 		<!-- Google analytics code -->
 		<script type="text/javascript">
@@ -121,7 +121,6 @@ if (isset($_GET['ajax'])) {
 <? if (($theme->page_subtype == "login") or ($theme->page_subtype == "reauthenticate")): ?>
 	<?= $content ?>
 <? else: /*not login | reauthenticate */ ?>
-<div class="pear">
 
 <div id="gsNavBar" class="gcBorder1">
     <div class="lNavBar">
@@ -210,7 +209,6 @@ if (isset($_GET['ajax'])) {
 	</div>
     <? if (!module::get_var("th_pear4gallery3", "hide_logo")): ?><button id="logoButton"></button><? endif ?>
 </div>
-</div> <? /*class="pear"*/ ?>
 <? endif ?>
   </body>
 </html>
