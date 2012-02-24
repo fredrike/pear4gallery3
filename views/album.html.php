@@ -17,7 +17,7 @@ $(function() {
 <div id="mosaicTable">
   <div id="mosaicDetail">
     <div id="mosaicHover" class="hoverViewTopMenu">
-        <div id="detail_download" title="Download this photo" class="controller half" onclick="window.open(slideshowImages[pear.currentImg][5])"> </div>
+        <div id="detail_download" title="Download this photo" class="controller half" onclick="window.open(pear.sitePath + 'pear/download/' + slideshowImages[pear.currentImg][1])"> </div>
         <div id="detail_info" title="Show more information about this photo" class="controller half info_detail g-dialog-link"> </div>
         <? if(module::is_active("comment")): ?>
         <div id="detail_comment" title="Comments" class="detail controller half comments_detail g-dialog-link"></div>

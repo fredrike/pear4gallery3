@@ -57,4 +57,36 @@ class Pear_Controller extends Controller {
 
     print $v;
   }
+  public function download($id){
+    $item = ORM::factory("item", $id);
+
+    // Make sure we have access to the item
+    if (!access::can("view", $item)) {
+      throw new Kohana_404_Exception();
+    }
+
+    // Make sure we have view_full access to the original
+    if (!access::can("view_full", $item)) {
+      throw new Kohana_404_Exception();
+    }
+
+    // Don't try to load a directory
+    if ($item->is_album()) {
+      throw new Kohana_404_Exception();
+    }
+
+    $file = $item->file_path();
+
+    if (!file_exists($file)) {
+      throw new Kohana_404_Exception();
+    }
+
+    header("Content-Length: " . filesize($file));
+    header("Pragma: public");
+    header("Content-Type: application/force-download");
+    header("Content-Disposition: attachment; filename=\"$item->name\"");
+
+    Kohana::close_buffers(false);
+    readfile($file);
+  }
 }
