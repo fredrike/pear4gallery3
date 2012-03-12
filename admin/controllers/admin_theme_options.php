@@ -158,6 +158,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
     $group->checkbox("build_resize")->label(t("Mark all Image Resizes for Rebuild"))->checked(false);
     $group->checkbox("build_thumbs")->label(t("Mark all Thumbnails for Rebuild"))->checked(false);
     $group->checkbox("build_exif")->label(t("Mark Exif Info data for reload"))->checked(false);
+    $iptccheck = module::is_active("iptc") and module::info("iptc");
     if ($iptccheck):
       $group->checkbox("build_iptc")->label(t("Mark IPTC Info data for reload"))->checked(false);
     endif;
