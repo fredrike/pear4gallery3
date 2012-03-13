@@ -311,20 +311,16 @@ bottom: 0;
 #logoButton {
 display: block;
 z-index: 100;
-background: transparent url('../icons/pear_logo_sml.png') no-repeat center left;
-width: 30px;
+background: transparent url('../icons/pear_logo_sml.png') no-repeat center center;
+width: 40px;
 height: 40px;
 border: 0;
-margin-left: -15px;
+margin-left: -20px;
 position: absolute;
 left: 50%;
 cursor: pointer; /* hand-shaped cursor */
 }
 
-#logoButton:hover, #logoButton.hover {
-border: 0;
-background: transparent url('../icons/pear_logo_sml.png') no-repeat center left;
-}
 
 /************************ COLOR PICKER **************************/
 

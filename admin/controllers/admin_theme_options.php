@@ -77,11 +77,14 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
 
     $group = $form->group("edit_theme")->label(t("General Settings"));
     $group->input("favicon")
-      ->label(t("URL (or relative path) to your favicon.ico"))
+      ->label(t("URL (relative path) to your favicon.ico"))
       ->value(module::get_var("gallery", "favicon_url"));
     $group->input("appletouchicon")
-      ->label(t("URL (or relative path) to your apple-touch-icon.png"))
+      ->label(t("URL (relative path) to apple-touch-icon.png"))
       ->value(module::get_var("gallery", "appletouchicon_url"));
+    $group->input("logo_path")
+      ->label(t("URL (relative path) to custom logo"))
+      ->value(module::get_var("gallery", "logo_path"));
     $group->input("slideshow_time")
       ->label(t("Slideshow timeout (in ms)"))
       ->value(module::get_var("th_pear4gallery3", "slideshow_time", "5000"));
@@ -116,6 +119,9 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
     $group->input("ga_code")
       ->label(t("<a href=\"http://www.google.com/analytics/\">Google analytics</a> code."))
       ->value(module::get_var("th_pear4gallery3", "ga_code"));
+    $group->input("skimm_lim")
+      ->label(t("Limit amount of thumbs in album skimming"))
+      ->value(module::get_var("th_pear4gallery3", "skimm_lim", "50"));
 
     /* Advanced Options - Mosaic page ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -221,6 +227,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
     module::clear_var("th_pear4gallery3", "show_sidebar");
     module::clear_var("th_pear4gallery3", "sidebar_view");
     module::clear_var("th_pear4gallery3", "ga_code");
+    module::clear_var("th_pear4gallery3", "skimm_lim");
     module::clear_var("th_pear4gallery3", "mosaic_effect");
   }
 
@@ -264,12 +271,6 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
         endif;
         $purge_cache  = $form->maintenance->purge_cache->value;
 
-        $thumb_descmode_a = $form->edit_theme_adv_thumb->thumb_descmode_a->value;
-        $thumb_descmode = $form->edit_theme_adv_thumb->thumb_descmode->value;
-        $thumb_metamode = $form->edit_theme_adv_thumb->thumb_metamode->value;
-        $photo_descmode = $form->edit_theme_adv_photo->photo_descmode->value;
-        $photo_popupbox = $form->edit_theme_adv_photo->photo_popupbox->value;
-
         if ($build_resize):
           graphics::remove_rule("gallery", "resize", "gallery_graphics::resize");
           graphics::add_rule("gallery", "resize", "gallery_graphics::resize",
@@ -296,8 +297,8 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
         module::set_var("gallery", "page_size", 50);
         module::set_var("gallery", "favicon_url", $form->edit_theme->favicon->value);
         module::set_var("gallery", "appletouchicon_url", $form->edit_theme->appletouchicon->value);
+        module::set_var("gallery", "logo_path", $form->edit_theme->logo_path->value);
 
-        $this->save_item_state("logo_path", $form->edit_theme->logo_path->value, $form->edit_theme->logo_path->value);
         $this->save_item_state("slideshow_time", $form->edit_theme->slideshow_time->value != 5000, filter_var($form->edit_theme->slideshow_time->value, FILTER_VALIDATE_INT, array('options' => array('default' => 5000, 'min_range' => 1000))));
 
         // * Advanced Options - General ******************************************
@@ -310,6 +311,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
         $this->save_item_state("show_breadcrumbs",$form->edit_theme_adv_main->show_breadcrumbs->value, TRUE);
         $this->save_item_state("sidebar_view",$form->edit_theme_adv_main->sidebar_view->value != "hidden", $form->edit_theme_adv_main->sidebar_view->value);
         $this->save_item_state("ga_code",            $form->edit_theme_adv_main->ga_code->value, $form->edit_theme_adv_main->ga_code->value);
+        $this->save_item_state("skimm_lim",            $form->edit_theme_adv_main->skimm_lim->value != 50, $form->edit_theme_adv_main->skimm_lim->value);
 
         // * Advanced Options - Photo page ***************************************
         $this->save_item_state("mosaic_effect",   $form->edit_theme_adv_mosaic->mosaic_effect->value != "blind", $form->edit_theme_adv_mosaic->mosaic_effect->value);
@@ -321,10 +323,6 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
 */
 
         module::event("theme_edit_form_completed", $form);
-
-        if ($_priorratio != $thumb_ratio):
-          message::warning(t("Thumb aspect ratio has been changed. Consider rebuilding thumbs if needed."));
-        endif;
 
         message::success(t("Updated theme details"));
 

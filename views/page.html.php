@@ -206,7 +206,10 @@ if (isset($_GET['ajax'])) {
 		</div>
         <div class="clear"></div>
 <? endif ?>
-	</div>
+  </div>
+    <? if (module::get_var("gallery", "logo_path")): ?>
+    <style type="text/css">#logoButton { background-image: url("<?= module::get_var("gallery", "logo_path") ?>"); }</style>
+    <? endif ?>
     <? if (!module::get_var("th_pear4gallery3", "hide_logo")): ?><button id="logoButton"></button><? endif ?>
 </div>
 <? endif ?>

@@ -35,9 +35,9 @@
 if($child->is_album()):
   $granchildren = $child->viewable()->children();
 $offset = 0;
-$step = round(200/min(count($granchildren),50));
+$step = round(200/min(count($granchildren),module::get_var("th_pear4gallery3", "skimm_lim", "50")));
 foreach ($granchildren as $i => $granchild):?>
-      <? if(++$i > 50) break; ?>
+      <? if(++$i > module::get_var("th_pear4gallery3", "skimm_lim", "50")) break; ?>
       <? if ($granchild->has_thumb()): ?>
       <?= $granchild->thumb_img(array("style" => "display: none;")) ?>
  <? $javaScript .= "thumbImages['area_" . $granchild->id ."'] = '" . $granchild->thumb_img(array("style" => "display: none;")) . "';\n" ?>
