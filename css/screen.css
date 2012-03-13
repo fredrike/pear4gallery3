@@ -61,7 +61,7 @@ h2 {
 #g-content,
 #g-site-menu,
 h3 {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 #g-sidebar,
@@ -72,7 +72,7 @@ h3 {
 #g-banner,
 #g-footer,
 .g-message {
-  font-size: .8em;
+  font-size: 1em;
 }
 
 #g-album-grid .g-item,
@@ -133,6 +133,7 @@ legend {
   font-weight: bold;
   margin: 0;
   padding: 0 .2em;
+  color: #999;
 }
 
 #g-banner legend,

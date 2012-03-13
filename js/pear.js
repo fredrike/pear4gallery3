@@ -309,7 +309,6 @@ function swatchImg(imageId) {
             $('#mosaicDetailContainer').hide(0, function () {
                 $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
                 $('#mosaicImg').attr('src',  slideshowImages[imageId][0]);
-                $('#mosaicImg').css('cursor', "pointer");
                 mosaicResize();
                 $('#mosaicDetailContainer').show();
             });
@@ -320,7 +319,6 @@ function swatchImg(imageId) {
             $('#mosaicDetailContainer').hide(pear.mosaicEffect, options, "fast", function () {
                 $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
                 $('#mosaicImg').attr('src',  slideshowImages[imageId][0]);
-                $('#mosaicImg').css('cursor', "pointer");
                 mosaicResize();
                 $('#mosaicDetailContainer').show(pear.mosaicEffect, options, "slow");
             });
@@ -342,8 +340,8 @@ function swatchImg(imageId) {
     $(".controller").each( function () { 
         $(this).css('background-image',$(this).css('background-image')); });
     $('#mosaicHover').show();
-    updateHash();
     mosaicResize();
+    updateHash();
     $('#img_detail').fadeIn();
 }
 
@@ -591,7 +589,7 @@ function pearInit(options) {
 
     setKeys();
     thumbLoad();
-    $('#gridContainer').endlessScroll({ fireOnce: true, fireDelay: 500, callback: function(p) { loadMore(); } });
+    $('#gridContainer').endlessScroll({ fireOnce: true, bottomPixels: 200, callback: function(p) { loadMore(); } });
     $('#gridContainer').trigger('scroll');
 
     $('#mosaicDetailContainer').hover(function () {

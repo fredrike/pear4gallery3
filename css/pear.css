@@ -181,6 +181,10 @@ outline: medium none;
     position: absolute;
 }
 
+#mosaicImg {
+  cursor: pointer;
+}
+
 #imgMenu {
     position: absolute !important;
     left: 10px;
