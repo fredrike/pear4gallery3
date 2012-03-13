@@ -75,6 +75,9 @@ function thumbLoad(index) {
     $(".g-item").hover(
             function() {
             $(this).addClass("hovering");
+            if($(this).hasClass("g-album")) {
+                $(this).data('thumb_src' ,$(this).children('img.g-thumbnail').attr('src'));
+            }
             if(pear.currentView === 'mosaic') { return; }
             // Insert a placeholder to hold the item's position in the grid
             var placeHolder = $(this).clone().attr("id", "g-place-holder");
@@ -89,6 +92,9 @@ function thumbLoad(index) {
             function() {
             var sib_height;
             $(this).removeClass("hovering");
+            if($(this).hasClass("g-album")) {
+                $(this).children('img.g-thumbnail').attr('src', $(this).data('thumb_src'));
+            }
             if (pear.currentView === 'mosaic') { return; }
             // Remove the placeholder and hover class from the item
             $(this).removeClass("g-hover-item");
