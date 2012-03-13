@@ -10,7 +10,7 @@ if($result->loaded()) {
   $defaultView = $result->view_mode;
 }
 ?>
-$(function() {
+$(window).load(function () {
   pearInit( {
     sitePath: "<?= url::site("/") ?>",
     defaultView: "<?=$defaultView?>",
