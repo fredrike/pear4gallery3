@@ -3,10 +3,17 @@
 <script type="text/javascript">
 var slideshowImages = new Array();
 var thumbImages = new Array();
+<?
+$defaultView = module::get_var("th_pear4gallery3", "mainmenu_view", "grid");
+$result = ORM::factory("pear_album_view")->where("album_id", "=", $item->id)->find();
+if($result->loaded()) {
+  $defaultView = $result->view_mode;
+}
+?>
 $(function() {
   pearInit( {
     sitePath: "<?= url::site("/") ?>",
-    defaultView: "<?=module::get_var("th_pear4gallery3", "mainmenu_view", "grid")?>",
+    defaultView: "<?=$defaultView?>",
     defaultBg: "<?=module::get_var("th_pear4gallery3", "background", "black")?>",
     mosaicEffect: "<? $mosaic_effect = module::get_var("th_pear4gallery3", "mosaic_effect", "blind"); if ($mosaic_effect == "none") print ""; else print $mosaic_effect; ?>",
     slideshowTimeout: <?=module::get_var("th_pear4gallery3", "slideshow_time", "5000")?> });
