@@ -81,7 +81,7 @@
        var cssWidth = new String($("#g-dialog form").css("width"));
        var childWidth = cssWidth.replace(/[^0-9]/g,"");
        var size = $.gallery_get_viewport_size();
-       if ($("#g-dialog iframe").length) {
+       if ($("#g-dialog iframe").length && !$("#g-dialog #fb-root")) {
          dialogWidth = size.width() - 100;
          // Set the iframe width and height
          $("#g-dialog iframe").width("100%").height(size.height() - 100);

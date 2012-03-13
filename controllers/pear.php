@@ -22,16 +22,22 @@ class Pear_Controller extends Controller {
     $item = ORM::factory("item", $id);
     access::required("view", $item);
 
-    $comments = ORM::factory("comment")
-      ->where("item_id", "=", $item->id)
-      ->where("state", "=", "published")
-      ->order_by("created", "ASC")
-      ->find_all();
+    if(module::is_active("facebook_comment")) {
+      $v = new Theme_View("facebook_comment.html", "other", "comment-fragment");
+      $v->url = $item->url();
+      print $v;
+    } else {
+      $comments = ORM::factory("comment")
+        ->where("item_id", "=", $item->id)
+        ->where("state", "=", "published")
+        ->order_by("created", "ASC")
+        ->find_all();
 
-    $v = new Theme_View("comments.html", "other", "comment-fragment");
-    $v->comments = $comments;
-    $v->item = $item;
-    print $v;
+      $v = new Theme_View("comments.html", "other", "comment-fragment");
+      $v->comments = $comments;
+      $v->item = $item;
+      print $v;
+    }
   }
   public function about($id){
     $item = ORM::factory("item", $id);
