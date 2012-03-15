@@ -42,7 +42,7 @@ class Pear_Controller extends Controller {
   public function about($id){
     $item = ORM::factory("item", $id);
     access::required("view", $item);
-    $v = new Theme_View("about.html");
+    $v = new Theme_View("about.html","","");
     $v->item = $item;
     $details = array(array("caption" => "Title", "value" => $item->title));
     if ( $item->description != $item->title) {
