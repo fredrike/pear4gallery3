@@ -56,8 +56,6 @@ endif;
 <? foreach ($children as $i => $child): ?>
 <? if(!($child->is_album() || $child->is_movie())): ?>
 slideshowImages[<?= $item_no++ ?>] = (['<?= $child->resize_url() ?>', '<?= $child->id ?>', '<?= $child->width ?>','<?= $child->height ?>', '<?= htmlentities($child->title, ENT_QUOTES) ?>', '<? if (access::can("view_full", $child)) print "true" ?>', '<?= $child->url() ?>']);
-<? else: ?>
-<? $item_no++ ?>
 <? endif ?>
 <? endforeach ?>
 <?= $javaScript ?>

@@ -49,6 +49,9 @@ function scaleIt(v, sliding) {
 }
 
 function thumbLoad(index) {
+    //Reindex the slideshowImages array.
+    slideshowImages = slideshowImages.filter(function (i) { return i != undefined});
+
     //Load non skimming thumbs
     $('.g-thumbnail').each( function() { $(this).attr('src', thumbImages[$(this).attr('id')]); });
     //Load skimming thumbs
@@ -57,7 +60,12 @@ function thumbLoad(index) {
     //Re-initiate all fancyness.
     if (pear.currentView === 'mosaic') { $('p.giTitle,div.giInfo').hide(); } else { $('p.giTitle,div.giInfo').show(); }
     scaleIt($('#imgSlider').slider('value'));
-    $('.g-item:not(.g-hover-item)').each(function (index) { $(this).unbind('click'); if ($(this).is('.g-photo')) { $(this).click(function () { if (pear.currentView === 'mosaic') { swatchImg(index); } else { focusImage(index); } }); }});
+    $('.g-photo:not(.g-hover-item)').each(function (index) {
+        $(this).unbind('click');
+        $(this).click(function () {
+            if (pear.currentView === 'mosaic') { swatchImg(index); }
+            else { focusImage(index); } });
+    });
     // Apply jQuery UI icon and hover styles to context menus
     if ($(".g-context-menu").length) {
         $(".g-context-menu li").addClass("ui-state-default");
