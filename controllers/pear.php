@@ -24,7 +24,7 @@ class Pear_Controller extends Controller {
 
     if(module::is_active("facebook_comment")) {
       $v = new Theme_View("facebook_comment.html", "other", "comment-fragment");
-      $v->url = $item->url();
+      $v->url = $item->abs_url();
       print $v;
     } else {
       $comments = ORM::factory("comment")
