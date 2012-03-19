@@ -112,7 +112,7 @@ function thumbLoad(index) {
     $.fn.gallery_hover_init();
     thumbPadding();
 
-    if(pear.viewMode != 'carousel') {
+    if(pear.currentView != 'carousel') {
         pear.pearCarousel = null;
         $("#pearImageFlow").empty();
     }
@@ -617,8 +617,8 @@ function pearInit(options) {
     //Set event for Thumb Click.
     $('.g-item').each(function (index) { $(this).click(function () { if (pear.currentView === 'mosaic') { swatchImg(index); } else { focusImage(index); } }); });
     $('#mosaicDetailContainer').click(function () { focusImage(pear.currentImg); });
-    $('#prev').click(throttle(function () { swatchImg(pear.currentImg - 1); }),375);
-    $('#next').click(throttle(function () { swatchImg(pear.currentImg + 1); }),375);
+    $('#prev').click(throttle(function () { swatchImg(pear.currentImg - 1); },375));
+    $('#next').click(throttle(function () { swatchImg(pear.currentImg + 1); },375));
     $('#img_detail').click(function () { hideDetailView(); });
 
     if (typeof slideshowImages !== 'undefined' && !slideshowImages.length) {
