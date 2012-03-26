@@ -15,8 +15,19 @@ if (isset($_GET['ajax'])) {
   foreach (end($parents)->viewable()->children() as $i => $child)
     if(!($child->is_album() || $child->is_movie()))
       if($child->url() == $_SERVER['REQUEST_URI']) {
-        header("HTTP/1.1 302 Found");
-        header("Location: ".end($parents)->url()."#img=$i&viewMode=detail&redirected=true");
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" <?= $theme->html_attributes() ?> xml:lang="en" lang="en">
+  <head>
+    <title>Photo page</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="refresh" content="1;url=<?=end($parents)->url()?>#img=<?=$i?>&amp;viewMode=detail&amp;redirected=true" />
+    <?= $theme->head() ?>
+  </head>
+  <body>Page moved <a href="<?=end($parents)->url()?>#img=<?=$i?>&amp;viewMode=detail&amp;redirected=true">here</a>.</body>
+</html>
+<?
         die(0);
       }?>
 <? endif ?>
