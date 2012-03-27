@@ -204,6 +204,7 @@ outline: medium none;
 }
 
 #sidebarContainer {
+    width: 221px;
     position: fixed;
     right: 0;
     overflow: none;

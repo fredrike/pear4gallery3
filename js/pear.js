@@ -385,6 +385,7 @@ function focusImage(id, redirected) {
     pear.detailView = true;
     swatchImg(id);
     $('#play_detail,#pause_detail').addClass('hidden');
+    $('.g-block-content').hide();
     $('#detailView').fadeIn('slow');
     showHoverView();
     //Image count.
@@ -448,6 +449,7 @@ function startSlideshow() {
     slideShowMode = true;
     $('#play_detail').addClass('hidden');
     $('#pause_detail').removeClass('hidden');
+    $('.g-block-content').hide();
     $('#detailView').fadeIn('slow');
     showHoverView();
     pear.slideShowId = pear.currentImg;
@@ -518,6 +520,7 @@ function startImageFlow() {
 
 function hideDetailView() {
     $('#detailView').hide();
+    $('.g-block-content').show();
     pear.slideShowMode = pear.detailView = false;
     if (pear.slideShowHandler !== null) { clearTimeout(pear.slideShowHandler); }
     pear.slideShowHandler = null;
