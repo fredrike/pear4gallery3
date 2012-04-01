@@ -297,7 +297,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
         module::set_var("gallery", "page_size", 50);
         module::set_var("gallery", "favicon_url", $form->edit_theme->favicon->value);
         module::set_var("gallery", "appletouchicon_url", $form->edit_theme->appletouchicon->value);
-        $this->save_item_state("logo_path", $form->edit_theme->logo_path->value, url::file($form->edit_theme->logo_path->value));
+        $this->save_item_state("logo_path", $form->edit_theme->logo_path->value, $form->edit_theme->logo_path->value);
 
         $this->save_item_state("slideshow_time", $form->edit_theme->slideshow_time->value != 5000, filter_var($form->edit_theme->slideshow_time->value, FILTER_VALIDATE_INT, array('options' => array('default' => 5000, 'min_range' => 1000))));
 

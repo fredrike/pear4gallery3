@@ -226,7 +226,12 @@ if (isset($_GET['ajax'])) {
 <? endif ?>
   </div>
     <? if (!module::get_var("th_pear4gallery3", "hide_logo")): ?>
-      <button id="logoButton" style="background-image: url('<?= module::get_var("th_pear4gallery3", "logo_path", $theme->url("icons/pear_logo_sml.png") ) ?>') !important"></button>
+    <? if (module::get_var("gallery", "logo_path")) {
+      $logo_url = url::file(module::get_var("th_pear4gallery3", "logo_path"));
+    } else {
+      $logo_url = $theme->url("icons/pear_logo_sml.png");
+    } ?>
+      <button id="logoButton" style="background-image: url('<?= $logo_url ?>') !important"></button>
     <? endif ?>
 </div>
 <? endif ?>
