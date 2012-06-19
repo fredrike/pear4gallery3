@@ -103,6 +103,7 @@ function thumbLoad(index) {
             if($(this).hasClass("g-album")) {
                 $(this).children('img.g-thumbnail').attr('src', $(this).data('thumb_src'));
             }
+            if (pear.currentView === 'mosaic') { return; }
             // Remove the placeholder and hover class from the item
             $(this).removeClass("g-hover-item");
             $("#g-place-holder").remove();
@@ -112,17 +113,13 @@ function thumbLoad(index) {
     $.fn.gallery_hover_init();
     thumbPadding();
 
-    if(pear.currentView != 'carousel') {
+    if(pear.viewMode != 'carousel') {
         pear.pearCarousel = null;
         $("#pearImageFlow").empty();
     }
-    //Pre fetch images if we have loaded all our thumbs needed.
-    if ( slideshowImages.length > index) {
-        if ( typeof prefetch === 'undefined') { prefetch = 0; }
-        for ( ; prefetch < slideshowImages.length; prefetch=prefetch+1 ) {
-            $('<img />').attr('src', slideshowImages[prefetch][0]);
-        }
-    }
+    //Pre fetch images
+    //if ( typeof prefetch === 'undefined') { prefetch = 0; }
+    //for ( ; prefetch < slideshowImages.length; prefetch=prefetch+1 ) { $('<img />').attr('src', slideshowImages[prefetch][0]); }
 }
 
 function loadMore() {
@@ -299,18 +296,18 @@ function swatchSkin(intSkin) {
     updateHash();
 }
 
-//Set a updating timer so users can't update before the image has appeared..
+//Set a updating timer so users can't update before the image has appeard..
 function swatchImg(imageId) {
     if (imageId < 0 || imageId >= slideshowImages.length) {
         if ( navigation.next !== '') {
             $.get(navigation.next,{ ajax: '1'},function (data) {
                     $('#gridContainer').append(data);
+                    thumbLoad();
                     swatchImg(imageId);
                     });
         }
         return;
     }
-    thumbLoad(imageId);
 
     if ( typeof slideshowImages[imageId] === 'undefined' ) {
         imageId += 1;
@@ -324,24 +321,20 @@ function swatchImg(imageId) {
         $('#imageTitle').each(function (i) {$(this).html("<h2></h2>"); $(this).attr("savedH", $(this).height()); });
         if ( pear.mosaicEffect === "" ) {
             $('#mosaicDetailContainer').hide(0, function () {
-                $('#mosaicImg').one('load', function () {
-                    $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
-                    mosaicResize();
-                    $('#mosaicDetailContainer').show();
-                });
+                $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
                 $('#mosaicImg').attr('src',  slideshowImages[imageId][0]);
+                mosaicResize();
+                $('#mosaicDetailContainer').show();
             });
         }
         else {
             var options = {};
             if ( pear.mosaicEffect === "scale" ) { options = { percent: 0 }; }
             $('#mosaicDetailContainer').hide(pear.mosaicEffect, options, "fast", function () {
-                $('#mosaicImg').one('load', function () {
-                    $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
-                    mosaicResize();
-                    $('#mosaicDetailContainer').show(pear.mosaicEffect, options, "slow");
-                });
+                $('#imageTitle').html("<h2>" + slideshowImages[imageId][4] + "</h2>");
                 $('#mosaicImg').attr('src',  slideshowImages[imageId][0]);
+                mosaicResize();
+                $('#mosaicDetailContainer').show(pear.mosaicEffect, options, "slow");
             });
         }
     }
@@ -350,6 +343,9 @@ function swatchImg(imageId) {
     $('#mosaicHover').hide();
     $('#prev').toggleClass('disabled', (pear.currentImg === 0));
     $('#next').toggleClass('disabled', (pear.currentImg === slideshowImages.length - 1));
+    $('#img_detail').hide();
+    /* Update image and title in focus view */
+    $('#img_detail').attr('src', slideshowImages[pear.currentImg][0]);
     $('.info_detail').attr('href', pear.sitePath + "pear/about/" + slideshowImages[pear.currentImg][1]);
     $('.comments_detail').attr('href', pear.sitePath + "pear/show_comments/" + slideshowImages[pear.currentImg][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
@@ -358,16 +354,9 @@ function swatchImg(imageId) {
     $(".controller").each( function () { 
         $(this).css('background-image',$(this).css('background-image')); });
     $('#mosaicHover').show();
-    /* Update image and title in focus view */
-    $('#img_detail').hide(0, function () {
-        $('#img_detail').one('load', function () {
-            if (pear.detailView === true || pear.slideShowMode === true) { mosaicResize(); }
-            $('#img_detail').fadeIn();
-            $('#loading').hide();
-        });
-        $('#img_detail').attr('src', slideshowImages[pear.currentImg][0]);
-    });
+    mosaicResize();
     updateHash();
+    $('#img_detail').fadeIn();
 }
 
 function hideHoverView() {
@@ -385,17 +374,16 @@ function focusImage(id, redirected) {
     if (id < 0 || id >= slideshowImages.length) {
         if ( navigation.next !== '') {
             $.get(navigation.next,{ ajax: '1'},function (data) {
-                    $('#gridContainer').append(data);
+                    $('#mosaicGridContainer').append(data);
+                    thumbLoad();
                     focusImage(id);
                     });
         }
         return;
     }
-    thumbLoad(id);
     pear.currentImg = id;
     pear.detailView = true;
-    if (pear.currentView !== 'mosaic') { swatchImg(id); }
-    updateHash();
+    swatchImg(id);
     $('#play_detail,#pause_detail').addClass('hidden');
     $('.g-block-content').hide();
     $('#detailView').fadeIn('slow');
@@ -458,7 +446,7 @@ function togglePlayPause() {
 }
 
 function startSlideshow() {
-    pear.slideShowMode = true;
+    slideShowMode = true;
     $('#play_detail').addClass('hidden');
     $('#pause_detail').removeClass('hidden');
     $('.g-block-content').hide();
@@ -485,7 +473,6 @@ function switchToGrid() {
     $('#gridContainer').css('width', "100%");
     $('p.giTitle,div.giInfo').each(function (s) { $(this).show(); });
     switchMode('grid');
-    swatchImg(pear.currentImg);
     mosaicResize();
 }
 
@@ -540,17 +527,6 @@ function hideDetailView() {
     updateHash();
 }
 
-function throttle(fn, delay) {
-    var timer = null;
-    return function () {
-        var context = this, args = arguments;
-        clearTimeout(timer);
-        timer = setTimeout(function () {
-            fn.apply(context, args);
-        }, delay);
-    };
-}
-
 function setKeys() {
 /* Fixes the back button issue */
 /*	window.onunload = function()
@@ -558,7 +534,7 @@ function setKeys() {
 document = null;
 }
 */
-    $(document).keydown(throttle(function (e) {
+    $(document).keydown(function (e) {
         var charCode = e.keyCode || e.which;
         if ($( document.activeElement ).is("input:text,input:password,textarea")) { return; }
         switch (charCode) {
@@ -579,7 +555,7 @@ document = null;
             hideDetailView();
             break;
         }
-    },375));
+    });
 }
 
 function pearInit(options) {
@@ -620,17 +596,16 @@ function pearInit(options) {
     //Set event for Thumb Click.
     $('.g-item').each(function (index) { $(this).click(function () { if (pear.currentView === 'mosaic') { swatchImg(index); } else { focusImage(index); } }); });
     $('#mosaicDetailContainer').click(function () { focusImage(pear.currentImg); });
-    $('#prev').click(throttle(function () { swatchImg(pear.currentImg - 1); },375));
-    $('#next').click(throttle(function () { swatchImg(pear.currentImg + 1); },375));
+    $('#prev').click(function () { swatchImg(pear.currentImg - 1); });
+    $('#next').click(function () { swatchImg(pear.currentImg + 1); });
     $('#img_detail').click(function () { hideDetailView(); });
 
     if (typeof slideshowImages !== 'undefined' && !slideshowImages.length) {
         pear.currentView = pear.defaultView = 'grid';
-        thumbLoad();
-        $('#loading').hide();
     }
 
     setKeys();
+    setTimeout(thumbLoad, 1);
     $('#gridContainer').endlessScroll({ fireOnce: true, bottomPixels: 200, callback: function(p) { loadMore(); } });
     $('#gridContainer').trigger('scroll');
 
@@ -669,6 +644,7 @@ function pearInit(options) {
     }
     checkCookie();
     $('#mosaicTable').css('top', 45 +$('#g-action-status').outerHeight(true));
+    $('#loading').hide();
 }
 
 function sidebarInit(mode) {
