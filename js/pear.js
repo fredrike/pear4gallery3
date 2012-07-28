@@ -171,6 +171,13 @@ function mosaicResize() {
         iHeight = parseFloat(slideshowImages[pear.currentImg][3].replace(/,/gi, "."));
         iRatio = iWidth / iHeight;
         if (isNaN(iRatio)) { iRatio = 1.3333; }
+    	if (iRatio > 1) {
+			iWidth = 800;
+			iHeight = 800 / iRatio;
+		} else {
+			iWidth = 800 * iRatio;
+			iHeight = 800;
+		}
     }
     if (typeof (window.innerWidth) === 'number') {
         //Non-IE
