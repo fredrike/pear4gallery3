@@ -6,7 +6,7 @@
   <? if ($i > 50) break; ?>
     <? $item_class = "g-photo"; ?>
     <? if ($child->is_album()): ?>
-      <? $item_class = "g-album\" onclick=\"window.location='".$child->url()."/'+getAlbumHash(skimimg);"; ?>
+      <? $item_class = "g-album\" onclick=\"window.location='".$child->url()."/'+getAlbumHash((typeof skimimg === 'undefined') ? 0 : skimimg);"; ?>
     <? endif ?>
     <? $img_class = "g-thumbnail"; ?>
     <? if ($child->is_photo()): ?>
