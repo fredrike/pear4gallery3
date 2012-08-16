@@ -136,7 +136,7 @@ outline: medium none;
 #g-banner {
   background-color: #555;
   border-bottom: 1px solid #333;
-  min-height: 5em;
+  min-height: 1em;
   padding: 1em 20px;
   position: relative;
 }
