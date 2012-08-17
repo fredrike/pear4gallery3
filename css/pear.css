@@ -177,7 +177,7 @@ outline: medium none;
 }
 
 #mosaicDetail {
-    position: absolute;
+    position: fixed;
     left: 0;
     width: 65%;
     height: 100%;
