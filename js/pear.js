@@ -128,7 +128,7 @@ function loadMore() {
         var url = navigation.next;
         navigation.next = '';
         $.get(url,{ ajax: '1'},function (data) {
-            $('#gridContainer').append(data);
+            $('.jspPane').append(data);
             thumbLoad();
         });
         return true;
@@ -609,8 +609,9 @@ function pearInit(options) {
 
     setKeys();
     setTimeout(thumbLoad, 1);
-    $('#gridContainer').endlessScroll({ fireOnce: true, bottomPixels: 200, callback: function(p) { loadMore(); } });
-    $('#gridContainer').trigger('scroll');
+    $('#gridContainer').bind('jsp-scroll-y',function(event, scrollPositionY, isAtTop, isAtBottom) {
+    	if(isAtBottom) {loadMore();}
+	});
 
     $('#mosaicDetailContainer').hover(function () {
         $(this).addClass("g-photo hovering");
