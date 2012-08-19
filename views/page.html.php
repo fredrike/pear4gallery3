@@ -99,12 +99,15 @@ if (isset($_GET['ajax'])) {
     <?= $theme->script("ui.init.js") ?>
     <?= $theme->script("jquery.parsequery.js") ?>
     <?= $theme->script("imageflow.packed.js") ?>
+    <?= $theme->script("jquery.mousewheel.js") ?>
+    <?= $theme->script("jquery.jscrollpane.min.js") ?>
     <?= $theme->css("yui/reset-fonts-grids.css") ?>
     <?= $theme->css("superfish/css/superfish.css") ?>
     <?= $theme->css("ui-pear-theme/jquery-ui-1.8.17.custom.css") ?>
     <?= $theme->css("screen.css") ?>
     <?= $theme->css("imageflow.packed.css") ?>
     <?= $theme->css("pear.css") ?>
+    <?= $theme->css("jquery.jscrollpane.css") ?>
 
     <!-- LOOKING FOR YOUR JAVASCRIPT? It's all been combined into the link below -->
     <?= $theme->get_combined("script") ?>
