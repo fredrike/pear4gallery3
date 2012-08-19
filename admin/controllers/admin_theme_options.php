@@ -120,7 +120,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
       ->label(t("<a href=\"http://www.google.com/analytics/\">Google analytics</a> code."))
       ->value(module::get_var("th_pear4gallery3", "ga_code"));
     $group->input("skimm_lim")
-      ->label(t("Limit amount of thumbs in album skimming"))
+      ->label(t("Limit amount of thumbs in album skimming (set to 0 to disable)"))
       ->value(module::get_var("th_pear4gallery3", "skimm_lim", "50"));
 
     /* Advanced Options - Mosaic page ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -140,6 +140,13 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
           "scale" => t("Shrink and grow an element"),
           "none" => t("Disable effects (faster switching)")))
       ->selected(module::get_var("th_pear4gallery3", "mosaic_effect", "blind"));
+
+    /* Advanced Options - Photo settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+    $group = $form->group("edit_theme_adv_photo")->label(t("Advanced Options - Photo settings"));
+    $group->input("resize_size")
+      ->label(t("Photo resize size (800 is default)"))
+      ->value(module::get_var("gallery", "resize_size", "800"));
 /*
     $group->dropdown("photo_descmode")
       ->label(t("Description Display Mode"))
@@ -258,8 +265,10 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
         message::success(t("Theme details are reset"));
       else:
         // * General Settings ****************************************************
+        $old_resize_size  = module::get_var("gallery", "resize_size", 800);
+        module::set_var("gallery", "resize_size", filter_var($form->edit_theme_adv_photo->resize_size->value, FILTER_VALIDATE_INT, array('options' => array('default' => 800, 'min_range' => 640))));
 
-        $resize_size  = 800;
+        $resize_size  = module::get_var("gallery", "resize_size", 800);
 
         $build_resize = $form->maintenance->build_resize->value;
         $build_thumbs = $form->maintenance->build_thumbs->value;
@@ -271,7 +280,7 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
         endif;
         $purge_cache  = $form->maintenance->purge_cache->value;
 
-        if ($build_resize):
+        if ($build_resize || $old_resize_size != $resize_size):
           graphics::remove_rule("gallery", "resize", "gallery_graphics::resize");
           graphics::add_rule("gallery", "resize", "gallery_graphics::resize",
             array("width" => $resize_size, "height" => $resize_size, "master" => Image::AUTO), 100);
