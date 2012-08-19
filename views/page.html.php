@@ -132,9 +132,6 @@ if (isset($_GET['ajax'])) {
 			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			 })();
 		</script>
-		<script type="text/javascript" id="sourcecode">
-			$(function(){$('#gridContainer').jScrollPane({autoReinitialise: true});});
-		</script>
 	</head>
 
   <body <?= $theme->body_attributes() ?>>
