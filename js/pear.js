@@ -472,7 +472,7 @@ function switchToGrid() {
     if (!$('#gridContainer').length) { return; }
     scaleIt($('#imgSlider').slider('value'));
     $('#mosaicDetail').hide();
-    $('#gridContainer').css('width', "100%");
+    $('#outerContainer').css('width', "100%");
     $('p.giTitle,div.giInfo').each(function (s) { $(this).show(); });
     switchMode('grid');
     mosaicResize();
@@ -485,7 +485,7 @@ function switchToMosaic() {
     if (!$('#gridContainer').length) { return; }
     scaleIt($('#imgSlider').slider('value'));
     $('#mosaicDetail').show();
-    $('#gridContainer').css('width', "35%");
+    $('#outerContainer').css('width', "35%");
     $('p.giTitle,div.giInfo').each(function (s) { $(this).hide(); });
     switchMode('mosaic');
     swatchImg(pear.currentImg);
