@@ -131,8 +131,13 @@ if (isset($_GET['ajax'])) {
 			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			 })();
 		</script>
-		<script type="text/javascript" id="sourcecode">
-			$(function(){$('#gridContainer').jScrollPane({autoReinitialise: true});});
+		<script type="text/javascript">
+		$(function(){
+			var scrollapi = $('#gridContainer').jScrollPane({autoReinitialise: true}).data('jsp');
+			$('#gridContainer').bind('jsp-scroll-y',function(event, scrollPositionY, isAtTop, isAtBottom) {
+				if($('#gridContainer').outerHeight() + scrollPositionY >= scrollapi.getContentHeight() - 200) {loadMore();}
+			});
+		});
 		</script>
 	</head>
 
