@@ -609,9 +609,6 @@ function pearInit(options) {
 
     setKeys();
     setTimeout(thumbLoad, 1);
-    $('#gridContainer').bind('jsp-scroll-y',function(event, scrollPositionY, isAtTop, isAtBottom) {
-    	if(isAtBottom) {loadMore();}
-	});
 
     $('#mosaicDetailContainer').hover(function () {
         $(this).addClass("g-photo hovering");
