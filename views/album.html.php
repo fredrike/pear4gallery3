@@ -41,8 +41,10 @@ $(window).load(function () {
         </div>
     </div>
   </div>
-  <div id="gridContainer" class="gallery-album">
-    <?= new View("thumbs.html") ?>
+  <div id="outerContainer">
+    <div id="gridContainer" class="gallery-album">
+	  	<?= new View("thumbs.html") ?>
+	  </div>
   </div>
   <div id="pearFlow"><div id="pearImageFlow" class="imageflow"></div></div>
 </div>
