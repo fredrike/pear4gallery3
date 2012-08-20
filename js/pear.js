@@ -16,7 +16,7 @@ function thumbPadding() {
     var size, width, margin;
     /* Padding on thumbs to make them flow nicer */
     size = Math.ceil((pear.currentView === 'mosaic') ? $('#imgSlider').slider('value') / 2 : $('#imgSlider').slider('value')) + 10;
-    width = $('#gridContainer').width() - $.getScrollbarWidth() - 8;
+    width = $('#gridContainer').width() - 16;
     margin = width / Math.floor(width / size) - size;
     $('.gallery-thumb').css({'margin-left': Math.ceil(margin / 2) + 'px', 'margin-right': Math.floor(margin / 2) + 'px'});
 }
