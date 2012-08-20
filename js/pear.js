@@ -609,6 +609,15 @@ function pearInit(options) {
 
     setKeys();
     setTimeout(thumbLoad, 1);
+    $(function(){
+		var scrollapi = $('#gridContainer').jScrollPane({autoReinitialise: true}).data('jsp');
+		$('#gridContainer').bind('jsp-scroll-y',function(event, scrollPositionY, isAtTop, isAtBottom) {
+			if($('#gridContainer').outerHeight() + scrollPositionY >= scrollapi.getContentHeight() - 200) {loadMore();}
+		});
+		$('#gridContainer').bind('jsp-initialised',function(event, isScrollable) {
+			if(!isScrollable) {loadMore();}
+		});
+	});
 
     $('#mosaicDetailContainer').hover(function () {
         $(this).addClass("g-photo hovering");
