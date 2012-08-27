@@ -353,9 +353,9 @@ function swatchImg(imageId) {
     $('.info_detail').attr('href', pear.sitePath + "pear/about/" + slideshowImages[pear.currentImg][1]);
     $('.comments_detail').attr('href', pear.sitePath + "pear/show_comments/" + slideshowImages[pear.currentImg][1]);
     $('#imageTitleLabel').html("<h2>" + slideshowImages[pear.currentImg][4] + "</h2>");
-    $('#download, #detail_download').toggleClass('hidden', 
+    $('#download, #detail_download').toggleClass('hidden',
             ( slideshowImages[pear.currentImg][5] === '' ));
-    $(".controller").each( function () { 
+    $(".controller").each( function () {
         $(this).css('background-image',$(this).css('background-image')); });
     $('#mosaicHover').show();
     mosaicResize();
@@ -506,10 +506,10 @@ function startImageFlow() {
             $('#pearImageFlow').append(img);
         }
         pear.pearCarousel = new ImageFlow();
-        pear.pearCarousel.init({ImageFlowID: 'pearImageFlow', 
-            aspectRatio: 2.4, imagesHeight: 0.6, 
+        pear.pearCarousel.init({ImageFlowID: 'pearImageFlow',
+            aspectRatio: 2.4, imagesHeight: 0.6,
             opacity: true, reflections: false,
-            startID: pear.currentImg + 1, 
+            startID: pear.currentImg + 1,
             onClick: function () { focusImage($(this).attr('longdesc')); },
             startAnimation: true, xStep: 200, imageFocusM: 1.0,
             imageFocusMax: 4, opacityArray: [10, 9, 6, 2],
@@ -578,8 +578,8 @@ function pearInit(options) {
     }
     pear.redirected = (h.redirected === 'true');
     if (h.viewMode !== undefined) {
-        if (h.viewMode === 'detail') { 
-            pear.currentView = pear.defaultView; 
+        if (h.viewMode === 'detail') {
+            pear.currentView = pear.defaultView;
             focusImage(pear.currentImg);
         }
         pear.currentView = h.viewMode;
@@ -589,7 +589,7 @@ function pearInit(options) {
     swatchSkin(pear.currentBg);
 
     if (navigator.appVersion.search(/MSIE [0-7]/i) !== -1) {
-        $('.track').each(function (s) {$(this).css('top', '-16px'); }); //Fix for IE's poor page rendering. 
+        $('.track').each(function (s) {$(this).css('top', '-16px'); }); //Fix for IE's poor page rendering.
     }
     /* 58.5 225 32.5 125 */
     $('#imgSlider').slider({ min: 75, max: 250, step: 2, value: 125,
@@ -618,7 +618,7 @@ function pearInit(options) {
         $(this).gallery_context_menu();
         $.fn.gallery_hover_init();},
         function () {
-            $(this).removeClass("g-photo hovering"); 
+            $(this).removeClass("g-photo hovering");
             $('#imgMenu').remove();});
 
     if (slideshowImages.length !== 0) {
