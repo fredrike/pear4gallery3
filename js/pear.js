@@ -361,6 +361,10 @@ function swatchImg(imageId) {
     mosaicResize();
     updateHash();
     $('#img_detail').fadeIn();
+
+    /* Facebook Like support */
+    $('#fbLike-detail, #fbLike-detail-dv').html('<fb:like href="'+window.location.protocol+'//'+window.location.hostname+slideshowImages[pear.currentImg][6]+'" width="450" send="'+$('#fbLike-detail').data('send')+'" layout="'+$('#fbLike-detail').data('layout')+'" show_faces="'+$('#fbLike-detail').data('faces')+'" colorscheme="dark" font="lucida grande"></fb:like>');
+    if (typeof(FB) !== 'undefined') FB.XFBML.parse();
 }
 
 function hideHoverView() {

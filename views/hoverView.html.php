@@ -2,6 +2,9 @@
 <div id="detailView" onmousemove="showHoverView();">
 	<div class="overlay"> </div>
 	<div class="content">
+  <? if(module::is_active("facebook_like")): ?>
+    <div id="fbLike-detail-dv" style="top: 15px; position: absolute; left: 15px;"></div>
+  <? endif ?>
 		<div class="imageContainer">
 			<div class="titleLabel" id="imageTitleLabel" style="bottom: width: 624px;"></div>
 			<div id="detailImageView" class=""> <img style="visibility: visible;" src="" alt="" id="img_detail"/> </div>

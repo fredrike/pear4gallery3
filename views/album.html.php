@@ -40,6 +40,17 @@ $(window).load(function () {
             <div class="gbBlock gcBorder1" id="imageTitle"> </div>
         </div>
     </div>
+  <? if(module::is_active("facebook_like")): ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?=module::get_var("facebook_like", "appId");?>";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <div id="fbLike-detail" style="top: 15px; position: absolute; left: 15px;" data-layout="<?= module::get_var("facebook_like", "layout", "standard")?>" data-send="<?= module::get_var("facebook_like", "send", "false")?>" data-faces="<?= module::get_var("facebook_like", "show_faces", "false")?>"></div>
+  <? endif ?>
   </div>
   <div id="gridContainer" class="gallery-album">
     <?= new View("thumbs.html") ?>
