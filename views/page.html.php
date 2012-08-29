@@ -22,10 +22,10 @@ if (isset($_GET['ajax'])) {
   <head>
     <title>Photo page</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="refresh" content="1;url=<?=end($parents)->url()?>#img=<?=$i?>&amp;viewMode=detail&amp;redirected=true" />
+    <meta http-equiv="refresh" content="1;url=<?=end($parents)->url()?>#img=<?=$i?>&amp;detailView&amp;redirected=true" />
     <?= $theme->head() ?>
   </head>
-  <body>Page moved <a href="<?=end($parents)->url()?>#img=<?=$i?>&amp;viewMode=detail&amp;redirected=true">here</a>.</body>
+  <body>Page moved <a href="<?=end($parents)->url()?>#img=<?=$i?>&amp;detailView&amp;redirected=true">here</a>.</body>
 </html>
 <?
         die(0);
