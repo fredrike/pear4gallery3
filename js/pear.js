@@ -688,7 +688,7 @@ function sidebarInit(mode) {
             $('#toggleSidebar').off().click(function (){
                 $(this).toggleClass("ui-icon-plusthick ui-icon-minusthick");
                 if ( $(this).is('.ui-icon-plusthick')) {
-                    $('#sidebarContainer').width(1);
+                    $('#sidebarContainer').width(0);
                     $('#mosaicTable').css('right', '1px');
                     setCookie('sidebarState', 'hidden', 1);
                 } else {
