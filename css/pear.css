@@ -37,7 +37,6 @@ body {
 .gallery-album {
   display: block;
   height: 400px;
-  overflow: auto;
   padding-bottom: 10px;
   padding-top: 10px;
 }
@@ -160,16 +159,24 @@ outline: medium none;
 }
 
 #mosaicTable {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#mainContainer {
     position: fixed;
     bottom: 40px;
-    overflow: hidden;
+    overflow: auto;
     left: 0;
     right: 0;
     margin: 0;
 }
 
 #mosaicDetail {
-    position: absolute;
+    position: fixed;
     left: 0;
     width: 65%;
     height: 100%;
@@ -215,7 +222,7 @@ outline: medium none;
   position: absolute;
   z-index: 101;
   top: 1px;
-  left: -18px;
+  left: -26px;
 }
 
 #sidebar {

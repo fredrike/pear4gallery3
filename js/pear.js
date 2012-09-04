@@ -223,12 +223,12 @@ function mosaicResize() {
     /* Fix for firefox that don't support dimensions on empty img tags */
     $('#mosaicImg').css('display', 'inline-block');
     /* Vertical center of image in mosaicView */
-    siteTop = $('#mosaicTable').height() / 2 - ($("#imageTitle").attr("savedH") + $("#mosaicImg").height()) / 2;
+    siteTop = $('#mainContainer').height() / 2 - ($("#imageTitle").attr("savedH") + $("#mosaicImg").height()) / 2;
     siteTop = siteTop < 0 ? 0 : siteTop;
     $('#mosaicDetailContainer').css('top', siteTop);
 
     /* Vertical center of content in carousel */
-    siteTop = $('#mosaicTable').height() / 2 - $('#pearImageFlow').height() / 2;
+    siteTop = $('#mainContainer').height() / 2 - $('#pearImageFlow').height() / 2;
     siteTop = siteTop < 0 ? 0 : siteTop;
     $('#pearImageFlow').css('top', siteTop);
 
@@ -650,7 +650,7 @@ function pearInit(options) {
         switchToGrid();
     }
     checkCookie();
-    $('#mosaicTable').css('top', 45 +$('#g-action-status').outerHeight(true));
+    $('#mainContainer').css('top', 45 +$('#g-action-status').outerHeight(true));
     $('#loading').hide();
 }
 

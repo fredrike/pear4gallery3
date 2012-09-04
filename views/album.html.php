@@ -25,6 +25,7 @@ $(window).load(function () {
 });
 </script>
 <div id="loading"></div>
+<div id="mainContainer">
 <div id="mosaicTable">
   <div id="mosaicDetail">
     <div id="mosaicHover" class="hoverViewTopMenu">
@@ -67,6 +68,7 @@ $(window).load(function () {
     </div>
   </div>
 <? endif ?>
+</div>
 <? if(($theme->item())): ?>
 <?= $theme->album_bottom() ?>
 <? endif ?>
