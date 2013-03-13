@@ -43,11 +43,11 @@ if (isset($_GET['ajax'])) {
         <?= $page_title ?>
       <? else: ?>
         <? if ($theme->item()): ?>
-          <?= $theme->item()->title ?>
+          <?=  html::purify($theme->item()->title) ?>
         <? elseif ($theme->tag()): ?>
           <?= t("Photos tagged with %tag_title", array("tag_title" => $theme->tag()->name)) ?>
         <? else: /* Not an item, not a tag, no page_title specified.  Help! */ ?>
-          <?= item::root()->title ?>
+          <?= html::purify(item::root()->title) ?>
         <? endif ?>
       <? endif ?>
     </title>
@@ -171,7 +171,7 @@ if (isset($_GET['ajax'])) {
     </div>
 <? endif ?>
     <div class="rNavBar">
-        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="$('#g-header').slideToggle('normal', function(){$('#g-header').is(':hidden') ? $('#sidebarButton').text('Show Options') : $('#sidebarButton').text('Hide Options')});"> <span class="ui-button-text">Show Options</span> </button>
+        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="$('#g-header').slideToggle('normal', function(){$('#g-header').is(':hidden') ? $('#sidebarButton').text('Show Options') : $('#sidebarButton').text('Hide Options')});"> <span class="ui-button-text" id="sidebarButton">Show Options</span> </button>
     </div>
 </div>
 <div id="g-header" class="ui-helper-clearfix" style="display: none;">

@@ -15,7 +15,7 @@
       <? $item_class = "g-video\" onclick=\"window.location='".$child->url()."';"; ?>
       <? $img_class = "g-thumbnail p-movie"; ?>
     <? endif ?>
-  <div id="g-item-id-<?= $child->id ?>" class="g-item gallery-thumb <?= $item_class ?>" title="<?= $child->description?>">
+  <div id="g-item-id-<?= $child->id ?>" class="g-item gallery-thumb <?= $item_class ?>" title="<?= html::purify($child->description) ?>">
     <?= $theme->thumb_top($child) ?>
     <? if ($child->is_album() || $child->is_movie()): ?>
         <div class="gallery-thumb-round"></div>
@@ -55,7 +55,7 @@ endif;
 <? $item_no = ($page*$page_size)-$page_size; ?>
 <? foreach ($children as $i => $child): ?>
 <? if(!($child->is_album() || $child->is_movie())): ?>
-slideshowImages[<?= $item_no++ ?>] = (['<?= $child->resize_url() ?>', '<?= $child->id ?>', '<?= $child->resize_width ?>','<?= $child->resize_height ?>', '<?= htmlentities($child->title, ENT_QUOTES) ?>', '<? if (access::can("view_full", $child)) print "true" ?>', '<?= $child->url() ?>']);
+slideshowImages[<?= $item_no++ ?>] = (['<?= $child->resize_url() ?>', '<?= $child->id ?>', '<?= $child->resize_width ?>','<?= $child->resize_height ?>', '<?= html::purify($child->title) ?>', '<? if (access::can("view_full", $child)) print "true" ?>', '<?= $child->url() ?>']);
 <? endif ?>
 <? endforeach ?>
 <?= $javaScript ?>
