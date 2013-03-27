@@ -14,7 +14,7 @@
          <?= $details[$i]["caption"] ?>
          </td>
          <td class="g-odd">
-         <?= html::clean($details[$i]["value"]) ?>
+         <?= nl2br(html::purify($details[$i]["value"])) ?>
          </td>
        </tr>
        <? endfor ?>
