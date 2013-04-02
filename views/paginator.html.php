@@ -27,6 +27,6 @@
 ?>
 <script type="text/javascript">
 var navigation = new Array();
-navigation['next'] = '<?= $next_page_url ?>';
-navigation['prev'] = '<?= $previous_page_url ?>';
+navigation['next'] = '<?= str_replace('&amp;ajax=1', '', $next_page_url) ?>';
+navigation['prev'] = '<?= str_replace('&amp;ajax=1', '', $previous_page_url) ?>';
 </script>
