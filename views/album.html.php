@@ -28,14 +28,14 @@ $(window).load(function () {
 <div id="mosaicTable">
   <div id="mosaicDetail">
     <div id="mosaicHover" class="hoverViewTopMenu">
-        <div id="detail_download" title="Download this photo" class="controller half" onclick="window.open(pear.sitePath + 'pear/download/' + slideshowImages[pear.currentImg][1])"> </div>
-        <div id="detail_info" title="Show more information about this photo" class="controller half info_detail g-dialog-link"> </div>
+        <div id="detail_download" title="<?= t('Download this photo')->for_html_attr() ?>" class="controller half" onclick="window.open(pear.sitePath + 'pear/download/' + slideshowImages[pear.currentImg][1])"> </div>
+        <div id="detail_info" title="<?= t('Show more information about this photo')->for_html_attr() ?>" class="controller half info_detail g-dialog-link"> </div>
         <? if(module::is_active("comment")): ?>
-        <div id="detail_comment" title="Comments" class="detail controller half comments_detail g-dialog-link"></div>
+        <div id="detail_comment" title="<?= t('Comments')->for_html_attr() ?>" class="detail controller half comments_detail g-dialog-link"></div>
         <? endif ?>
     </div>
     <div id="mosaicDetailContainer">
-      <img id="mosaicImg" src="" alt="Main image"/>
+      <img id="mosaicImg" src="" alt="<?= t('Main image')->for_html_attr() ?>"/>
         <div class="gsContentDetail" style="width: 100%;">
             <div class="gbBlock gcBorder1" id="imageTitle"> </div>
         </div>
@@ -59,7 +59,7 @@ $(window).load(function () {
 </div>
 <? if (module::get_var("th_pear4gallery3", "sidebar_view") != ''): ?>
   <div id="sidebarContainer">
-    <span id="toggleSidebar" class="ui-icon ui-icon-plusthick ui-state-default ui-helper-clearfix ui-widget ui-corner-all" title="Toggle Sidebar"></span>
+    <span id="toggleSidebar" class="ui-icon ui-icon-plusthick ui-state-default ui-helper-clearfix ui-widget ui-corner-all" title="<?= t('Toggle Sidebar')->for_html_attr() ?>"></span>
     <div id="sidebar">
     <? if ($theme->page_subtype != "login"): ?>
       <?= new View("sidebar.html") ?>

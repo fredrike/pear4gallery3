@@ -11,16 +11,16 @@
 		</div>
     <div id="hoverView" onmouseover="pear.hovering=true;" onmouseout="pear.hovering=false;">
     <div id="hoverViewMenu">
-      <div id="prev" title="(P)revious" class="controller"></div>
-      <div id="pause_detail" title="Pause" class="controller" onclick="togglePlayPause();"> </div>
-      <div id="play_detail" title="Play" class="controller" onclick="togglePlayPause();"> </div>
-      <div id="next" title="(N)ext" class="controller"></div>
+      <div id="prev" title="<?= t('(P)revious')->for_html_attr() ?>" class="controller"></div>
+      <div id="pause_detail" title="<?= t('Pause')->for_html_attr() ?>" class="controller" onclick="togglePlayPause();"> </div>
+      <div id="play_detail" title="<?= t('Play')->for_html_attr() ?>" class="controller" onclick="togglePlayPause();"> </div>
+      <div id="next" title="<?= t('(N)ext')->for_html_attr() ?>" class="controller"></div>
     </div></div>
     <div class="hoverViewTopMenu">
-        <div id="download" title="Download this photo" class="controller half" onclick="window.open(pear.sitePath + 'pear/download/' + slideshowImages[pear.currentImg][1])"> </div>
-        <div id="info" title="Show more information about this photo" class="controller half info_detail g-dialog-link"> </div>
-        <? if(module::is_active("comment")): ?><div id="comment" title="Comments" class="controller half comments_detail g-dialog-link" onclick=""></div><?endif ?>
-        <div id="close" title="Close" class="controller half" onclick="hideDetailView();"></div>
+        <div id="download" title="<?= t('Download this photo')->for_html_attr() ?>" class="controller half" onclick="window.open(pear.sitePath + 'pear/download/' + slideshowImages[pear.currentImg][1])"> </div>
+        <div id="info" title="<?= t('Show more information about this photo')->for_html_attr() ?>" class="controller half info_detail g-dialog-link"> </div>
+        <? if(module::is_active("comment")): ?><div id="comment" title="<?= t('Comments')->for_html_attr() ?>" class="controller half comments_detail g-dialog-link" onclick=""></div><?endif ?>
+        <div id="close" title="<?= t('Close')->for_html_attr() ?>" class="controller half" onclick="hideDetailView();"></div>
     </div>
 	</div>
 </div>

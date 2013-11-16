@@ -21,7 +21,7 @@
     <? if (isset($tags)): ?>
       <tr>
          <td class="g-even">
-             Tags
+	     <?= t('Tags') ?>
          </td>
          <td class="g-odd">
             <? foreach ($tags as $key => $tag): ?>
@@ -43,7 +43,7 @@
         $('#exif_data').html(data);
         $('#g-dialog').dialog('option', 'position', 'center');
          });">
-   <span class="ui-button-text">Load exif data</span>
+   <span class="ui-button-text"><?= t('Load exif data') ?></span>
 </button>
 </div></div>
 <? endif ?>
