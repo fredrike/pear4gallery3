@@ -20,7 +20,7 @@ if (isset($_GET['ajax'])) {
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?= $theme->html_attributes() ?> xml:lang="en" lang="en">
   <head>
-    <title>Photo page</title>
+    <title><?= t('Photo page') ?></title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="refresh" content="1;url=<?=end($parents)->url()?>#img=<?=$i?>&amp;detailView&amp;redirected=true" />
     <?= $theme->head() ?>
@@ -171,7 +171,7 @@ if (isset($_GET['ajax'])) {
     </div>
 <? endif ?>
     <div class="rNavBar">
-        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="$('#g-header').slideToggle('normal', function(){$('#g-header').is(':hidden') ? $('#sidebarButton').text('Show Options') : $('#sidebarButton').text('Hide Options')});"> <span class="ui-button-text" id="sidebarButton">Show Options</span> </button>
+        <button class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all" onclick="$('#g-header').slideToggle('normal', function(){$('#g-header').is(':hidden') ? $('#sidebarButton').text(<?= strtr(t('Show Options')->for_js(), array('"'=>'&quot;')) ?>) : $('#sidebarButton').text(<?= strtr(t('Hide Options')->for_js(), array('"'=>'&quot;')) ?>)});"> <span class="ui-button-text" id="sidebarButton"><?= t('Show Options') ?></span> </button>
     </div>
 </div>
 <div id="g-header" class="ui-helper-clearfix" style="display: none;">
@@ -193,34 +193,34 @@ if (isset($_GET['ajax'])) {
 <?= $content ?>
 
 <div id="footerWrapper">
-	<div title="Change size of photos" id="sliderView" class="sliderView">
-		<div title="View at smallest photo size" class="smaller" onclick="$('#imgSlider').slider('value', 0);"></div>
-		<div title="View at largest photo size" class="larger" onclick="$('#imgSlider').slider('value', 250);"></div>
+	<div title="<?= t('Change size of photos')->for_html_attr() ?>" id="sliderView" class="sliderView">
+		<div title="<?= t('View at smallest photo size')->for_html_attr() ?>" class="smaller" onclick="$('#imgSlider').slider('value', 0);"></div>
+		<div title="<?= t('View at largest photo size')->for_html_attr() ?>" class="larger" onclick="$('#imgSlider').slider('value', 250);"></div>
 		<div id="imgSlider" class="track">
 		</div>
 	</div>
 
 	<div style="" class="" id="colorPicker">
-		<div class="label">Color:</div>
-		<div title="View this album with a black background" id="black" class="swatch" onclick="swatchSkin('black');return false;"> </div>
-		<div title="View this album with a dark gray background" id="dkgrey" class="swatch" onclick="swatchSkin('dkgrey');return false;"> </div>
-		<div title="View this album with a light gray background" id="ltgrey" class="swatch" onclick="swatchSkin('ltgrey');return false;"> </div>
-		<div title="View this album with a white background" id="white" class="swatch" onclick="swatchSkin('white');return false;"> </div>
+		<div class="label"><?= t('Color:') ?></div>
+		<div title="<?= t('View this album with a black background')->for_html_attr() ?>" id="black" class="swatch" onclick="swatchSkin('black');return false;"> </div>
+		<div title="<?= t('View this album with a dark gray background')->for_html_attr() ?>" id="dkgrey" class="swatch" onclick="swatchSkin('dkgrey');return false;"> </div>
+		<div title="<?= t('View this album with a light gray background')->for_html_attr() ?>" id="ltgrey" class="swatch" onclick="swatchSkin('ltgrey');return false;"> </div>
+		<div title="<?= t('View this album with a white background')->for_html_attr() ?>" id="white" class="swatch" onclick="swatchSkin('white');return false;"> </div>
 	</div>
 
 	<div class="" style="" id="viewControls">
 <? if ($theme->page_subtype != "movie"): ?>
-		<div title="Display this album in a grid view" id="grid" class="grid viewSwitcher sel sel-with-viewSwitcher viewSwitcher-icon">
-			<span class="vs-icon vs-icon-grid"></span>Grid
+		<div title="<?= t('Display this album in a grid view')->for_html_attr() ?>" id="grid" class="grid viewSwitcher sel sel-with-viewSwitcher viewSwitcher-icon">
+		        <span class="vs-icon vs-icon-grid"></span><?= t('Grid') ?>
 		</div>
-		<div title="Display this album in a mosaic view" id="mosaic" class="viewSwitcher mosaic">
-			<span class="vs-icon vs-icon-mosaic"></span>Mosaic
+		<div title="<?= t('Display this album in a mosaic view')->for_html_attr() ?>" id="mosaic" class="viewSwitcher mosaic">
+			<span class="vs-icon vs-icon-mosaic"></span><?= t('Mosaic') ?>
 		</div>
-		<div title="Display this album in a carousel view" id="carousel" class="carousel viewSwitcher">
-			<span class="vs-icon vs-icon-carousel"></span>Carousel
+		<div title="<?= t('Display this album in a carousel view')->for_html_attr() ?>" id="carousel" class="carousel viewSwitcher">
+			<span class="vs-icon vs-icon-carousel"></span><?= t('Carousel') ?>
 		</div>
-		<div title="Play a slideshow of this album" id="slideshow" class="viewSwitcher slideshow slideshow-with-viewSwitcher">
-			<span class="vs-icon vs-icon-slideshow"></span>Slideshow
+		<div title="<?= t('Play a slideshow of this album')->for_html_attr() ?>" id="slideshow" class="viewSwitcher slideshow slideshow-with-viewSwitcher">
+			<span class="vs-icon vs-icon-slideshow"></span><?= t('Slideshow') ?>
 		</div>
         <div class="clear"></div>
 <? endif ?>

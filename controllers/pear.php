@@ -45,16 +45,16 @@ class Pear_Controller extends Controller {
     access::required("view", $item);
     $v = new Theme_View("about.html","","");
     $v->item = $item;
-    $details = array(array("caption" => "Title", "value" => $item->title));
+    $details = array(array("caption" => t("Title"), "value" => $item->title));
     if ( $item->description != $item->title) {
-      array_push($details, array("caption" => "Description", "value" => $item->description) );
+      array_push($details, array("caption" => t("Description"), "value" => $item->description) );
     }
     if ( isset($item->captured )) {
-      array_push($details, array("caption" => "Captured", "value" => date(module::get_var("gallery", "date_time_format", "Y-M-d H:i:s"), $item->captured)));
+      array_push($details, array("caption" => t("Captured"), "value" => date(module::get_var("gallery", "date_time_format", "Y-M-d H:i:s"), $item->captured)));
     }
-    array_push($details, array("caption" => "Owner", "value" => $item->owner_id));
-    array_push($details, array("caption" => "Filename", "value" => $item->name));
-    array_push($details, array("caption" => "View count", "value" => $item->view_count));
+    array_push($details, array("caption" => t("Owner"), "value" => $item->owner_id));
+    array_push($details, array("caption" => t("Filename"), "value" => $item->name));
+    array_push($details, array("caption" => t("View count"), "value" => $item->view_count));
 
     $v->details = $details;
 
