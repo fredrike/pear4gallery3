@@ -641,7 +641,7 @@ function pearInit(options) {
 
     switch (pear.currentView) {
     case 'carousel':
-        startImageFlow();
+        setTimeout(startImageFlow, 100);
         break;
     case 'mosaic':
         switchToMosaic();
