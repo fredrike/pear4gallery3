@@ -173,6 +173,10 @@
            }
            else {
              $("#g-dialog").dialog('option', 'title', 'Error');
+             if(data.html) {
+               $('#g-dialog').dialog( "option", "position", 'center' );
+               return;
+             }
              if(data.form) {
                $("#g-dialog").html(data.form);
                self.form_loaded(null, $("#g-dialog form"));
