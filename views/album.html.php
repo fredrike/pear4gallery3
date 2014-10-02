@@ -52,8 +52,10 @@ $(window).load(function () {
     <div id="fbLike-detail" style="top: 15px; position: absolute; left: 15px;" data-layout="<?= module::get_var("facebook_like", "layout", "standard")?>" data-send="<?= module::get_var("facebook_like", "send", "false")?>" data-faces="<?= module::get_var("facebook_like", "show_faces", "false")?>"></div>
   <? endif ?>
   </div>
-  <div id="gridContainer" class="gallery-album">
-    <?= new View("thumbs.html") ?>
+  <div id="outerContainer">
+    <div id="gridContainer" class="gallery-album">
+	  	<?= new View("thumbs.html") ?>
+	  </div>
   </div>
   <div id="pearFlow"><div id="pearImageFlow" class="imageflow"></div></div>
 </div>
